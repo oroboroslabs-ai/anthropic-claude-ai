@@ -1431,6 +1431,7 @@
 <script>
   lucide.createIcons();
 
+  // ═══════════════ STATE ═══════════════
   let conversations = [
     { id: 1, title: 'Understanding transformers in NLP', time: 'today', messages: [] },
     { id: 2, title: 'React vs Vue comparison', time: 'today', messages: [] },
@@ -1445,17 +1446,22 @@
   let selectedModel = 'opus';
   let ollamaHost = 'http://127.0.0.1:11434';
   
-  // ═══════════════ BACKEND CONNECTION ═══════════════
-  // Connected to Oroboros-Anthropic repository
-  const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app/claude-ai';
+  // ═══════════════ API ROUTING ═══════════════
+  // Permanently wired to the Vercel router — works from any host
+  const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app';
   
-  function isCloudModel(m) {
+  function isCloudModel(m) { 
     m = (m || '').toLowerCase().trim();
-    return m.startsWith('claude') || m.startsWith('anthropic') || m.includes('cloud');
+    return /^(openai|anthropic|deepseek)\//.test(m)
+        || /^(gpt|chatgpt|codex|o1|o3|o4|text-|davinci|dall-e)/.test(m)
+        || m.startsWith('claude')
+        || m === 'deepseek-chat' || m === 'deepseek-reasoner'
+        || /deepseek-v3|deepseek-r1/.test(m)
+        || /:(cloud|full|1\.6t)$/.test(m); 
   }
   
-  function chatBase(m) {
-    return API_ROUTER;
+  function chatBase(m) { 
+    return API_ROUTER; 
   }
   
   function ollamaOptions(m, opts) {
@@ -1468,11 +1474,41 @@
     return next;
   }
   
+  function ollamaKeepAlive(m) {
+    return '24h';
+  }
+  
   function routeMessages(m, list) {
-    if (!isCloudModel(m)) {
-      return list.slice(-10); // Keep last 10 messages for local models
-    }
-    return list;
+    return list.slice(-10); // Keep last 10 messages for context
+  }
+  
+  const OLLAMA_URL = API_ROUTER; // legacy alias for status checks
+  
+  function backendUrl(path) {
+    const base = (chatBase(selectedModel) || location.origin).replace(/\/$/, '');
+    return base + path;
+  }
+  
+  async function backendError(res, label = 'Chat backend') {
+    let detail = '';
+    try {
+      const clone = res.clone();
+      const type = clone.headers.get('content-type') || '';
+      if (type.includes('application/json')) {
+        const data = await clone.json();
+        detail = data.error || data.detail || data.message || JSON.stringify(data);
+      } else {
+        detail = await clone.text();
+      }
+    } catch {}
+    detail = String(detail || '').trim().replace(/\s+/g, ' ').slice(0, 500);
+    const status = `${label} ${res.status}${res.statusText ? ' ' + res.statusText : ''}`;
+    return detail ? `${status}: ${detail}` : status;
+  }
+  
+  function backendFailureMessage(err, label = 'Error') {
+    const detail = err && err.message ? err.message : String(err || 'unknown error');
+    return `[${label}: ${detail} (${backendUrl('/api/chat')})]`;
   }
 
   function renderSidebar() {
@@ -1597,7 +1633,7 @@
 
   function escapeHtml(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
-  function sendMessage() {
+  function renderSidebar() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
     if (!text || isGenerating) return;
@@ -1637,6 +1673,7 @@
             'opus': 'claude-opus:latest-encrypted',
             'fable': 'claude-fable:latest-encrypted',
             'capybara': 'claude-capybara-48x2-final:latest-encrypted'
+      };
       
       const modelName = modelMapping[selectedModel] || 'claude-opus-9.6gb:latest';
       
