@@ -1597,6 +1597,61 @@
 
   function escapeHtml(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
+  // ═══════════════ API ROUTING ═══════════════
+  // Permanently wired to the Vercel router — works from any host
+  const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app';
+  
+  function isCloudModel(m) { 
+    m = (m || '').toLowerCase().trim();
+    return /^(openai|anthropic|deepseek)\//.test(m)
+        || /^(gpt|chatgpt|codex|o1|o3|o4|text-|davinci|dall-e)/.test(m)
+        || m.startsWith('claude')
+        || m === 'deepseek-chat' || m === 'deepseek-reasoner'
+        || /deepseek-v3|deepseek-r1/.test(m)
+        || /:(cloud|full|1\.6t)$/.test(m); 
+  }
+  
+  function chatBase(m) { 
+    return API_ROUTER; 
+  }
+  
+  function ollamaOptions(m, opts) {
+    const next = { ...opts };
+    // Add any model-specific options here
+    return next;
+  }
+  
+  function ollamaKeepAlive(m) {
+    return '24h';
+  }
+  
+  function routeMessages(m, list) {
+    return list.slice(-10); // Keep last 10 messages for context
+  }
+  
+  const OLLAMA_URL = API_ROUTER; // legacy alias for status checks
+  
+  function backendUrl(path) {
+    const base = (chatBase(currentModel) || location.origin).replace(/\/$/, '');
+    return base + path;
+  }
+  
+  async function backendError(res, label = 'Chat backend') {
+    let detail = '';
+    try {
+      const clone = res.clone();
+      const type = clone.headers.get('content-type') || '';
+      if (type.includes('application/json')) {
+        const data = await clone.json();
+        detail = data.error || data.detail || data.message || JSON.stringify(data);
+      } else {
+        detail = await clone.text();
+      }
+    } catch {}
+    detail = String(detail || '').trim().replace(/\s+/g, ' ').slice(0, 500);
+    return `${label} error ${res.status}: ${detail || res.statusText || 'Unknown error'}`;
+  }
+
   function sendMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
