@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "anthropic-claude-ai-model-chat",
+  "name": "oroboroslabs-ai-anthropic",
   "builds": [
     {
       "src": "api/**/*.js",
@@ -17,7 +17,18 @@
       "dest": "/api/$1"
     },
     {
+      "src": "/claude-ai",
+      "dest": "/chat-anthropic.html"
+    },
+    {
       "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "OLLAMA_HOST": "https://desktop-f4s5n12.taild4a403.ts.net"
+  }
+}
       "dest": "/public/$1"
     }
   ],
