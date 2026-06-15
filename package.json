@@ -1,0 +1,22 @@
+{
+  "name": "anthropic-claude-ai-model-chat",
+  "version": "1.0.0",
+  "description": "Claude AI Model Chat Interface - Sonnet Models",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "claude",
+    "anthropic",
+    "sonnet",
+    "ai",
+    "chat"
+  ],
+  "author": "DeepSeek Research",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
