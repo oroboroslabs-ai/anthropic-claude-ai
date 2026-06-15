@@ -17,23 +17,12 @@
       "dest": "/api/$1"
     },
     {
-      "src": "/claude-ai",
-      "dest": "/claude-ai/index.html"
-    },
-    {
-      "src": "/claude-ai/(.*)",
-      "dest": "/claude-ai/$1"
+      "src": "/",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
       "dest": "/$1"
-    }
-  ],
-  "env": {
-    "OLLAMA_HOST": "https://desktop-f4s5n12.taild4a403.ts.net"
-  }
-}
-      "dest": "/public/$1"
     }
   ],
   "env": {
