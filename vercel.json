@@ -18,7 +18,11 @@
     },
     {
       "src": "/claude-ai",
-      "dest": "/chat-anthropic.html"
+      "dest": "/claude-ai/index.html"
+    },
+    {
+      "src": "/claude-ai/(.*)",
+      "dest": "/claude-ai/$1"
     },
     {
       "src": "/(.*)",
