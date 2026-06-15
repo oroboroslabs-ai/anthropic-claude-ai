@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "@vercel/node@3"
+    }
+  },
   "env": {
     "OLLAMA_HOST": "https://desktop-f4s5n12.taild4a403.ts.net"
   }
