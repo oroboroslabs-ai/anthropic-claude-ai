@@ -22,8 +22,15 @@ module.exports = async (req, res) => {
     return;
   }
   
-  // Vercel auto-parses req.body for serverless functions
-  const body = req.body || {};
+  // Vercel auto-parses JSON body into req.body
+  const body = req.body;
+  if (!body || !body.messages) {
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ error: 'Missing messages in request body' }));
+    return;
+  }
+  
   const bodyStr = JSON.stringify(body);
   const target = OLLAMA_HOST + '/api/chat';
   const parsed = new URL(target);
