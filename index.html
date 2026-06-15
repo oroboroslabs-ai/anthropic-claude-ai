@@ -1634,6 +1634,62 @@
   function escapeHtml(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
   function renderSidebar() {
+    document.getElementById('todayChats').innerHTML = conversations.filter(c => c.time === 'today').map(c => createNavItem(c)).join('');
+    document.getElementById('weekChats').innerHTML = conversations.filter(c => c.time === 'week').map(c => createNavItem(c)).join('');
+  }
+
+  function createNavItem(c) {
+    const isActive = currentConversation && currentConversation.id === c.id;
+    return `<div class="nav-item ${isActive ? 'active' : ''}" onclick="loadConversation(${c.id})">
+      <i data-lucide="message-square" style="width:16px;height:16px;flex-shrink:0;"></i>
+      <span class="nav-item-text">${c.title}</span>
+      <span class="delete-btn" onclick="event.stopPropagation(); deleteConversation(${c.id})">
+        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+      </span>
+    </div>`;
+  }
+
+  function loadConversation(id) {
+    const conv = conversations.find(c => c.id === id);
+    if (!conv) return;
+    currentConversation = conv;
+    renderSidebar();
+    renderMessages();
+    if (window.innerWidth < 768) toggleSidebar();
+  }
+
+  function deleteConversation(id) {
+    conversations = conversations.filter(c => c.id !== id);
+    if (currentConversation && currentConversation.id === id) { currentConversation = null; showWelcome(); }
+    renderSidebar(); lucide.createIcons();
+  }
+
+  function newChat() {
+    currentConversation = null;
+    showWelcome();
+    document.getElementById('chatInput').value = '';
+    updateSendBtn();
+    if (window.innerWidth < 768) toggleSidebar();
+  }
+
+  function showWelcome() {
+    document.getElementById('welcomeScreen').style.display = 'flex';
+    document.getElementById('chatMessages').style.display = 'none';
+    document.getElementById('chatMessages').innerHTML = '';
+  }
+
+  function renderMessages() {
+    if (!currentConversation || currentConversation.messages.length === 0) { showWelcome(); return; }
+    document.getElementById('welcomeScreen').style.display = 'none';
+    const container = document.getElementById('chatMessages');
+    container.style.display = 'flex';
+    container.innerHTML = '';
+    currentConversation.messages.forEach(msg => container.appendChild(createMessageElement(msg)));
+    lucide.createIcons();
+    scrollToBottom();
+  }
+
+  function sendMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
     if (!text || isGenerating) return;
