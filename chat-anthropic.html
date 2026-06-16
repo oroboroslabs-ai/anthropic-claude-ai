@@ -922,26 +922,20 @@
       <div class="top-bar-actions">
         <!-- Oroboros Service Mesh Chips -->
         <div class="network-chips" id="networkChips">
-          <span class="svc-chip" data-service="q5" title="Q5 Hive Mind · 34³ · 300+ models">
-            <span class="chip-dot"></span>Q5
-          </span>
           <span class="svc-chip" data-service="worldfeed" title="WorldFeed · 6 data sources">
             <span class="chip-dot"></span>WF
           </span>
-          <span class="svc-chip" data-service="mcp_sov" title="MCP Sovereign · FST Crown 1272Hz">
+          <span class="svc-chip" data-service="q5" title="Q5 Hive Mind · 34³ · 300+ models">
+            <span class="chip-dot"></span>Q5
+          </span>
+          <span class="svc-chip" data-service="tor" title="Tor Network · 15 research categories">
+            <span class="chip-dot"></span>TOR
+          </span>
+          <span class="svc-chip" data-service="mcp" title="MCP Sovereign · FST Crown 1272Hz">
             <span class="chip-dot"></span>MCP
           </span>
           <span class="svc-chip" data-service="quantum" title="Quantum Conduit · Central Hub 11440">
             <span class="chip-dot"></span>QNT
-          </span>
-          <span class="svc-chip" data-service="video" title="Video Pipeline · 4K 720frm">
-            <span class="chip-dot"></span>VID
-          </span>
-          <span class="svc-chip" data-service="sd" title="Stable Diffusion · Image Gen">
-            <span class="chip-dot"></span>SD
-          </span>
-          <span class="svc-chip" data-service="summoned" title="Summoned Gateway · OpenAI-compat">
-            <span class="chip-dot"></span>GW
           </span>
         </div>
         <div class="media-dropdown-container">
@@ -1063,31 +1057,23 @@
     : 'https://anthropic-claude-chat.vercel.app';
   
   // ═══════════════ OROBOROS SERVICE MESH ═══════════════
-  // Full Oroboros network integration - all services
+  // Core Oroboros services only: WorldFeed, Q5, Tor, MCP, Quantum
   const OROBOROS_SERVICES = {
-    q5:       { url: 'http://localhost:8101', name: 'Q5 Hive Mind', port: 8101, desc: '34\u00b3 · 300+ models' },
     worldfeed:{ url: 'http://localhost:8100', name: 'WorldFeed', port: 8100, desc: '6 data sources' },
-    mcp_o:    { url: 'http://localhost:3002', name: 'MCP Oracle', port: 3002, desc: 'Knowledge graph' },
-    mcp_i:    { url: 'http://localhost:3003', name: 'MCP Interpreter', port: 3003, desc: 'Code execution' },
-    mcp_sov:  { url: 'http://localhost:3004', name: 'MCP Sovereign', port: 3004, desc: 'FST Crown 1272Hz' },
-    mcp_syn:  { url: 'http://localhost:3005', name: 'MCP Synthesizer', port: 3005, desc: 'Multi-model fusion' },
-    quantum:  { url: 'http://localhost:11440', name: 'Quantum Conduit', port: 11440, desc: 'Central Hub' },
-    video:    { url: 'http://localhost:8920', name: 'Video Pipeline', port: 8920, desc: '4K 720frm' },
-    sd:       { url: 'http://localhost:7860', name: 'Stable Diffusion', port: 7860, desc: 'Image Gen' },
-    summoned: { url: 'http://localhost:4000', name: 'Summoned Gateway', port: 4000, desc: 'OpenAI-compat' },
-    ollama:   { url: 'http://127.0.0.1:11434', name: 'Ollama AGI', port: 11434, desc: '118 models' }
+    q5:       { url: 'http://localhost:8101', name: 'Q5 Hive Mind', port: 8101, desc: '34\u00b3 · 300+ models' },
+    tor:      { url: 'http://localhost:9050', name: 'Tor Network', port: 9050, desc: '15 research cats' },
+    mcp:      { url: 'http://localhost:3004', name: 'MCP Sovereign', port: 3004, desc: 'FST Crown 1272Hz' },
+    quantum:  { url: 'http://localhost:11440', name: 'Quantum Conduit', port: 11440, desc: 'Central Hub' }
   };
   let networkStatus = {};
   for (const k of Object.keys(OROBOROS_SERVICES)) networkStatus[k] = false;
-  networkStatus.ollama = true;
   
   async function getOroborosServiceContext(query) {
     const ctx = [];
     const probes = [];
     
-    // Ping all services in parallel (3s timeout each)
+    // Ping all services in parallel (2.5s timeout each)
     for (const [key, svc] of Object.entries(OROBOROS_SERVICES)) {
-      if (key === 'ollama') { networkStatus.ollama = true; continue; }
       probes.push((async () => {
         try {
           const res = await fetch(`${svc.url}/health`, { signal: AbortSignal.timeout(2500) });
