@@ -1503,14 +1503,13 @@
   
   // ═══════════════ API ROUTING ═══════════════
   // Use local Ollama for local file access or localhost, Vercel for production
-  // const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app';
   const isLocal = window.location.protocol === 'file:' || 
                   window.location.hostname === 'localhost' || 
                   window.location.hostname === '127.0.0.1' ||
                   window.location.hostname === '';
   const API_ROUTER = isLocal 
     ? 'http://127.0.0.1:11434' 
-    : 'https://oroboroslabs-ai-anthropic.vercel.app';
+    : 'https://anthropic-claude-chat.vercel.app';
   
   function isCloudModel(m) { 
     m = (m || '').toLowerCase().trim();
