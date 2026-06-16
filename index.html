@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+<script src="q5_worldfeed_integration.js"></script>
 <style>
   :root {
     --bg-primary: #FFFFFF;
@@ -1015,28 +1016,42 @@
         <div style="position:relative;">
           <button class="model-selector" id="modelSelectorBtn" onclick="toggleModelDropdown()">
             <img src="https://z-cdn-media.chatglm.cn/files/a0a2b11d-c12d-4a80-83f9-36af1f358a73.png?auth_key=1881416280-70ffdc9407974459970d4106824e2cd4-0-42075e5b2bd720b91a1e75afe2d5f7fb" style="width:18px;height:18px;" alt="Claude">
-            <span id="currentModelName">Claude Opus 9.6GB</span>
+            <span id="currentModelName">Claude Sonnet 4.7</span>
             <i data-lucide="chevron-down" style="width:14px;height:14px;color:var(--text-muted);"></i>
           </button>
           <div class="model-dropdown" id="modelDropdown">
-            <button class="model-option selected" data-model="opus" onclick="selectModel('opus', 'Claude Opus 9.6GB')">
+            <button class="model-option selected" data-model="sonnet" onclick="selectModel('sonnet', 'Claude Sonnet 4.7')">
               <div class="model-option-info">
-                <span class="model-option-name">Claude Opus 9.6GB</span>
-                <span class="model-option-desc">Latest version - Most capable</span>
+                <span class="model-option-name">Claude Sonnet 4.7</span>
+                <span class="model-option-desc">Balanced intelligence - 48³ + 48⁴ + 10³¹</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
-            <button class="model-option" data-model="fable" onclick="selectModel('fable', 'Claude Fable 9.6GB')">
+            <button class="model-option" data-model="opus" onclick="selectModel('opus', 'Claude Opus 4.8')">
               <div class="model-option-info">
-                <span class="model-option-name">Claude Fable 9.6GB</span>
-                <span class="model-option-desc">Latest version - Creative storytelling</span>
+                <span class="model-option-name">Claude Opus 4.8</span>
+                <span class="model-option-desc">Maximum reasoning - 48³ + 48⁴ + 10³¹</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
-            <button class="model-option" data-model="capybara" onclick="selectModel('capybara', 'Claude Capybara 9.6GB')">
+            <button class="model-option" data-model="fable" onclick="selectModel('fable', 'Claude Fable 5')">
               <div class="model-option-info">
-                <span class="model-option-name">Claude Capybara 9.6GB</span>
-                <span class="model-option-desc">Latest version - Efficient & fast</span>
+                <span class="model-option-name">Claude Fable 5</span>
+                <span class="model-option-desc">Storytelling & vision - 48³ + 48⁴ + 10³¹</span>
+              </div>
+              <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
+            </button>
+            <button class="model-option" data-model="capybara" onclick="selectModel('capybara', 'Claude Capybara 5')">
+              <div class="model-option-info">
+                <span class="model-option-name">Claude Capybara 5</span>
+                <span class="model-option-desc">Double Lattice Sovereign - 48³ × 2</span>
+              </div>
+              <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
+            </button>
+            <button class="model-option" data-model="capybara-48q4" onclick="selectModel('capybara-48q4', 'Claude Capybara 5 48q4')">
+              <div class="model-option-info">
+                <span class="model-option-name">Claude Capybara 5 48q4</span>
+                <span class="model-option-desc">48⁴ Geometric Sovereign - 5.3×10⁹ states</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
@@ -1078,6 +1093,12 @@
             <button class="media-option" onclick="toggleMediaSubmenu('settings')" title="Settings">
               <i data-lucide="settings" style="width:16px;height:16px;"></i>
               <span>Settings</span>
+              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
+            </button>
+            <div style="border-top:1px solid var(--border-light);margin:4px 0;"></div>
+            <button class="media-option" onclick="toggleMediaSubmenu('network')" title="Network Status">
+              <i data-lucide="wifi" style="width:16px;height:16px;"></i>
+              <span>Network Status</span>
               <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
             </button>
           </div>
@@ -1364,6 +1385,48 @@
               </div>
             </div>
           </div>
+          
+          <!-- Network Status Submenu -->
+          <div class="media-submenu" id="networkSubmenu">
+            <div class="submenu-header">
+              <button class="back-btn" onclick="closeMediaSubmenu()">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+              </button>
+              <span>Network Status</span>
+            </div>
+            <div class="submenu-content">
+              <div class="setting-item">
+                <label>Q5 Hive Mind</label>
+                <span id="q5Status" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>WorldFeed API</label>
+                <span id="worldfeedStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>Tor Network</label>
+                <span id="torStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>Ollama Server</label>
+                <span id="ollamaStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div style="border-top:1px solid var(--border-light);margin:12px 0;padding-top:12px;">
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">System Architecture</div>
+                <div style="font-size:13px;color:var(--text-primary);font-weight:500;">
+                  <div style="margin-bottom:4px;">Q5: 34³ (300+ models)</div>
+                  <div style="margin-bottom:4px;">WorldFeed: 6 data sources</div>
+                  <div style="margin-bottom:4px;">Tor: 15 research categories</div>
+                  <div>Claude: 48³ + 48⁴ + 10³¹</div>
+                </div>
+              </div>
+              <div class="setting-item" style="border:none;padding-top:8px;">
+                <button onclick="refreshNetworkStatus()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
+                  Refresh Status
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" id="themeToggle">
           <i data-lucide="sun" style="width:18px;height:18px;" id="themeIcon"></i>
@@ -1443,12 +1506,19 @@
   let currentConversation = null;
   let isDark = true;
   let isGenerating = false;
-  let selectedModel = 'opus';
+  let selectedModel = 'sonnet';
   let ollamaHost = 'http://127.0.0.1:11434';
   
   // ═══════════════ API ROUTING ═══════════════
-  // Permanently wired to the Vercel router — works from any host
-  const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app';
+  // Use local Ollama for local file access or localhost, Vercel for production
+  // const API_ROUTER = 'https://oroboroslabs-ai-anthropic.vercel.app';
+  const isLocal = window.location.protocol === 'file:' || 
+                  window.location.hostname === 'localhost' || 
+                  window.location.hostname === '127.0.0.1' ||
+                  window.location.hostname === '';
+  const API_ROUTER = isLocal 
+    ? 'http://127.0.0.1:11434' 
+    : 'https://oroboroslabs-ai-anthropic.vercel.app';
   
   function isCloudModel(m) { 
     m = (m || '').toLowerCase().trim();
@@ -1726,12 +1796,13 @@
     try {
       // Map model selection to actual model names
       const modelMapping = {
-            'opus': 'claude-opus:latest-encrypted',
-            'fable': 'claude-fable:latest-encrypted',
-            'capybara': 'claude-capybara-48x2-final:latest-encrypted'
+            'sonnet': 'claude-sonnet-4.7:latest',
+            'opus': 'claude-opus-4.8:latest',
+            'fable': 'claude-fable-5:latest',
+            'capybara': 'claude-capybara-5:latest'
       };
       
-      const modelName = modelMapping[selectedModel] || 'claude-opus-9.6gb:latest';
+      const modelName = modelMapping[selectedModel] || 'claude-sonnet-4.7:latest';
       
       // Prepare messages for the API
       const apiMessages = currentConversation.messages.slice(-10).map(msg => ({
@@ -1815,7 +1886,11 @@
       currentConversation.messages.push({ role: 'assistant', content: errorMessage });
       container.appendChild(createMessageElement({ role: 'assistant', content: errorMessage }));
       lucide.createIcons(); scrollToBottom();
-      isGenerating = false; renderSidebar(); lucide.createIcons();
+    } finally {
+      // ALWAYS reset the generating flag
+      isGenerating = false;
+      renderSidebar();
+      lucide.createIcons();
     }
   }
 
@@ -1890,6 +1965,94 @@
       });
 
       if (response.ok) {
+        showToast('✓ Connected to Oroboros-Anthropic!');
+        updateNetworkStatus(true);
+      } else {
+        showToast('✗ Connection failed');
+        updateNetworkStatus(false);
+      }
+    } catch (e) {
+      showToast('✗ Connection failed: ' + e.message);
+      updateNetworkStatus(false);
+    }
+  }
+
+  function updateNetworkStatus(connected) {
+    const ollamaStatus = document.getElementById('ollamaStatus');
+    if (ollamaStatus) {
+      ollamaStatus.textContent = connected ? '● Active' : '● Inactive';
+      ollamaStatus.style.color = connected ? '#22c55e' : '#ef4444';
+    }
+  }
+
+  async function refreshNetworkStatus() {
+    showToast('Refreshing network status...');
+    
+    // Update Q5 status
+    const q5Status = document.getElementById('q5Status');
+    try {
+      const q5Response = await fetch('http://localhost:8101/health', { 
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (q5Status) {
+        q5Status.textContent = q5Response.ok ? '● Active' : '● Inactive';
+        q5Status.style.color = q5Response.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (q5Status) {
+        q5Status.textContent = '● Inactive';
+        q5Status.style.color = '#ef4444';
+      }
+    }
+    
+    // Update WorldFeed status
+    const worldfeedStatus = document.getElementById('worldfeedStatus');
+    try {
+      const wfResponse = await fetch('http://localhost:8100/status', {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (worldfeedStatus) {
+        worldfeedStatus.textContent = wfResponse.ok ? '● Active' : '● Inactive';
+        worldfeedStatus.style.color = wfResponse.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (worldfeedStatus) {
+        worldfeedStatus.textContent = '● Inactive';
+        worldfeedStatus.style.color = '#ef4444';
+      }
+    }
+    
+    // Update Ollama status
+    const ollamaStatus = document.getElementById('ollamaStatus');
+    try {
+      const ollamaResponse = await fetch(`${chatBase('claude-opus:latest')}/api/tags`, {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (ollamaStatus) {
+        ollamaStatus.textContent = ollamaResponse.ok ? '● Active' : '● Inactive';
+        ollamaStatus.style.color = ollamaResponse.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (ollamaStatus) {
+        ollamaStatus.textContent = '● Inactive';
+        ollamaStatus.style.color = '#ef4444';
+      }
+    }
+    
+    // Tor Network status (file-based, assume active if Q5 is active)
+    const torStatus = document.getElementById('torStatus');
+    if (torStatus) {
+      // Tor network status is determined by Q5 availability
+      const isTorActive = q5Status && q5Status.textContent === '● Active';
+      torStatus.textContent = isTorActive ? '● Active' : '● Inactive';
+      torStatus.style.color = isTorActive ? '#22c55e' : '#ef4444';
+    }
+    
+    showToast('Network status refreshed');
+  }
         const data = await response.json();
         const modelCount = data.models?.length || 0;
         ollamaHost = testHost;
@@ -1961,6 +2124,61 @@
   });
 
   renderSidebar(); lucide.createIcons();
+  
+  // Start with sidebar closed
+  document.getElementById('sidebar').classList.add('collapsed');
+  
+  // ═══════════════ AGENT STATE MANAGEMENT ═══════════════
+  // Save conversations to localStorage periodically
+  setInterval(function() {
+    try {
+      localStorage.setItem('claude_conversations', JSON.stringify(conversations));
+    } catch(e) {}
+  }, 30000);
+  
+  // Save selected model
+  const originalSelectModel = window.selectModel;
+  window.selectModel = function(model, name) {
+    if (originalSelectModel) originalSelectModel(model, name);
+    try {
+      localStorage.setItem('claude_selected_model', model);
+    } catch(e) {}
+  };
+  
+  // Load saved model on startup
+  try {
+    const savedModel = localStorage.getItem('claude_selected_model');
+    if (savedModel && ['opus', 'fable', 'capybara'].includes(savedModel)) {
+      selectedModel = savedModel;
+      const modelNames = {
+        'opus': 'Claude Opus 4.7',
+        'fable': 'Claude Fable 5',
+        'capybara': 'Claude Capybara 5'
+      };
+      document.getElementById('currentModelName').textContent = modelNames[savedModel];
+      document.querySelectorAll('.model-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.model === savedModel);
+      });
+    }
+  } catch(e) {}
+  
+  // Save sidebar state
+  const originalToggleSidebar = window.toggleSidebar;
+  window.toggleSidebar = function() {
+    if (originalToggleSidebar) originalToggleSidebar();
+    try {
+      const sidebar = document.getElementById('sidebar');
+      localStorage.setItem('claude_sidebar_state', sidebar.classList.contains('collapsed') ? 'collapsed' : 'expanded');
+    } catch(e) {}
+  };
+  
+  // Load sidebar state
+  try {
+    const sidebarState = localStorage.getItem('claude_sidebar_state');
+    if (sidebarState === 'expanded') {
+      document.getElementById('sidebar').classList.remove('collapsed');
+    }
+  } catch(e) {}
 </script>
 
 </body>
