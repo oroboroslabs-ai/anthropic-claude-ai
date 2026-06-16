@@ -688,178 +688,6 @@
     margin-top: 1px;
   }
 
-  /* Media Dropdown */
-  .media-dropdown {
-    position: absolute;
-    top: 52px;
-    right: 0;
-    background: var(--bg-primary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    z-index: 50;
-    min-width: 180px;
-    padding: 6px;
-    display: none;
-  }
-
-  .media-dropdown.open { display: block; }
-
-  .media-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 14px;
-    color: var(--text-primary);
-    border: none;
-    background: transparent;
-    width: 100%;
-    font-family: inherit;
-    text-align: left;
-  }
-
-  .media-option:hover { background: var(--bg-hover); }
-
-  .media-option span {
-    flex: 1;
-    font-weight: 500;
-  }
-
-  /* Media Submenu */
-  .media-submenu {
-    position: absolute;
-    top: 52px;
-    right: 0;
-    background: var(--bg-primary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    z-index: 51;
-    min-width: 280px;
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 0;
-    display: none;
-  }
-
-  .media-submenu.open { display: block; }
-
-  .submenu-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-light);
-    background: var(--bg-secondary);
-    border-radius: 12px 12px 0 0;
-    position: sticky;
-    top: 0;
-  }
-
-  .submenu-header span {
-    flex: 1;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .back-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--text-secondary);
-    background: transparent;
-    border: none;
-    font-family: inherit;
-  }
-
-  .back-btn:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-  }
-
-  .submenu-content {
-    padding: 12px 16px;
-  }
-
-  .setting-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-light);
-  }
-
-  .setting-item:last-child {
-    border-bottom: none;
-  }
-
-  .setting-item label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  .setting-select {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--bg-input);
-    color: var(--text-primary);
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .setting-select:hover {
-    border-color: var(--accent);
-  }
-
-  .setting-select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-light);
-  }
-
-  .setting-checkbox {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: var(--accent);
-  }
-
-  .setting-input {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    background: var(--bg-input);
-    color: var(--text-primary);
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s;
-    width: 180px;
-  }
-
-  .setting-input:hover {
-    border-color: var(--accent);
-  }
-
-  .setting-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-light);
-  }
-
   /* Toast */
   .toast {
     position: fixed;
@@ -1000,7 +828,7 @@
         <div class="user-avatar-small">U</div>
         <div class="user-info">
           <div class="user-name">User</div>
-          <div class="user-plan">Free plan</div>
+          <div class="user-plan">Online Mode</div>
         </div>
         <span class="pro-badge">PRO</span>
       </div>
@@ -1023,21 +851,18 @@
             <button class="model-option selected" data-model="sonnet" onclick="selectModel('sonnet', 'Claude Sonnet 4.7')">
               <div class="model-option-info">
                 <span class="model-option-name">Claude Sonnet 4.7</span>
-                <span class="model-option-desc">Balanced intelligence - 48³ + 48⁴ + 10³¹</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
             <button class="model-option" data-model="opus" onclick="selectModel('opus', 'Claude Opus 4.8')">
               <div class="model-option-info">
                 <span class="model-option-name">Claude Opus 4.8</span>
-                <span class="model-option-desc">Maximum reasoning - 48³ + 48⁴ + 10³¹</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
             <button class="model-option" data-model="fable" onclick="selectModel('fable', 'Claude Fable 5')">
               <div class="model-option-info">
                 <span class="model-option-name">Claude Fable 5</span>
-                <span class="model-option-desc">Storytelling & vision - 48³ + 48⁴ + 10³¹</span>
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
@@ -1051,373 +876,32 @@
         </div>
       </div>
       <div class="top-bar-actions">
-        <div style="position:relative;">
-          <button class="icon-btn" onclick="toggleMediaDropdown()" title="Media" id="mediaBtn">
-            <i data-lucide="layers" style="width:18px;height:18px;"></i>
+        <div class="media-dropdown-container">
+          <button class="icon-btn" onclick="toggleMediaDropdown()" title="Media Studio" id="mediaBtn">
+            <i data-lucide="video" style="width:18px;height:18px;"></i>
           </button>
           <div class="media-dropdown" id="mediaDropdown">
-            <button class="media-option" onclick="toggleMediaSubmenu('voice')" title="Voice">
+            <button class="media-dropdown-item" onclick="openMediaTab('voice')">
               <i data-lucide="mic" style="width:16px;height:16px;"></i>
               <span>Voice</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
             </button>
-            <button class="media-option" onclick="toggleMediaSubmenu('image')" title="Image">
+            <button class="media-dropdown-item" onclick="openMediaTab('image')">
               <i data-lucide="image" style="width:16px;height:16px;"></i>
-              <span>Image</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
+              <span>Image Gen</span>
             </button>
-            <button class="media-option" onclick="toggleMediaSubmenu('webpage')" title="Webpage">
-              <i data-lucide="globe" style="width:16px;height:16px;"></i>
-              <span>Webpage</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
-            </button>
-            <button class="media-option" onclick="toggleMediaSubmenu('audio')" title="Audio">
-              <i data-lucide="music" style="width:16px;height:16px;"></i>
-              <span>Audio</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
-            </button>
-            <button class="media-option" onclick="toggleMediaSubmenu('video')" title="Video Production">
+            <button class="media-dropdown-item" onclick="openMediaTab('video')">
               <i data-lucide="video" style="width:16px;height:16px;"></i>
-              <span>Video Production</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
+              <span>Video Gen</span>
+            </button>
+            <button class="media-dropdown-item" onclick="openMediaTab('webpage')">
+              <i data-lucide="layout" style="width:16px;height:16px;"></i>
+              <span>Web Design</span>
             </button>
             <div style="border-top:1px solid var(--border-light);margin:4px 0;"></div>
-            <button class="media-option" onclick="toggleMediaSubmenu('settings')" title="Settings">
-              <i data-lucide="settings" style="width:16px;height:16px;"></i>
-              <span>Settings</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
-            </button>
-            <div style="border-top:1px solid var(--border-light);margin:4px 0;"></div>
-            <button class="media-option" onclick="toggleMediaSubmenu('network')" title="Network Status">
+            <button class="media-dropdown-item" onclick="showNetworkStatus()">
               <i data-lucide="wifi" style="width:16px;height:16px;"></i>
               <span>Network Status</span>
-              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
             </button>
-          </div>
-          
-          <!-- Voice Submenu -->
-          <div class="media-submenu" id="voiceSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Voice Settings</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Voice Input</label>
-                <select class="setting-select">
-                  <option>Default Microphone</option>
-                  <option>External Mic</option>
-                  <option>System Audio</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Voice Output</label>
-                <select class="setting-select">
-                  <option>Default Speaker</option>
-                  <option>Headphones</option>
-                  <option>External Audio</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Voice Model</label>
-                <select class="setting-select">
-                  <option>Claude Voice Pro</option>
-                  <option>Claude Voice Standard</option>
-                  <option>Natural Voice</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Auto-detect Language</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Real-time Transcription</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Image Submenu -->
-          <div class="media-submenu" id="imageSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Image Settings</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Image Upload</label>
-                <select class="setting-select">
-                  <option>Drag & Drop</option>
-                  <option>Click to Upload</option>
-                  <option>Clipboard Paste</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Max Image Size</label>
-                <select class="setting-select">
-                  <option>10MB</option>
-                  <option>25MB</option>
-                  <option>50MB</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Image Analysis Model</label>
-                <select class="setting-select">
-                  <option>Claude Vision Pro</option>
-                  <option>Claude Vision Standard</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Auto-enhance Images</label>
-                <input type="checkbox" class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Generate Image Descriptions</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Webpage Submenu -->
-          <div class="media-submenu" id="webpageSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Webpage Settings</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Content Extraction</label>
-                <select class="setting-select">
-                  <option>Full Page</option>
-                  <option>Main Content Only</option>
-                  <option>Text Only</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Include Images</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Include Links</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>JavaScript Rendering</label>
-                <input type="checkbox" class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Max Page Size</label>
-                <select class="setting-select">
-                  <option>5MB</option>
-                  <option>10MB</option>
-                  <option>Unlimited</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Audio Submenu -->
-          <div class="media-submenu" id="audioSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Audio Settings</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Audio Input</label>
-                <select class="setting-select">
-                  <option>Microphone</option>
-                  <option>File Upload</option>
-                  <option>System Audio</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Audio Format</label>
-                <select class="setting-select">
-                  <option>MP3</option>
-                  <option>WAV</option>
-                  <option>OGG</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Transcription Model</label>
-                <select class="setting-select">
-                  <option>Claude Audio Pro</option>
-                  <option>Claude Audio Standard</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Auto-transcribe</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Generate Audio Response</label>
-                <input type="checkbox" class="setting-checkbox">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Video Submenu -->
-          <div class="media-submenu" id="videoSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Video Production</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Oroboros Pipeline</label>
-                <select class="setting-select">
-                  <option>Q:\oroboros-video-pipeline</option>
-                  <option>Local:8920</option>
-                  <option>Vercel Broker</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Video Quality</label>
-                <select class="setting-select">
-                  <option>4K (3840x2160)</option>
-                  <option>1080p (1920x1080)</option>
-                  <option>720p (1280x720)</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Max Frames</label>
-                <select class="setting-select">
-                  <option>720 frames</option>
-                  <option>360 frames</option>
-                  <option>180 frames</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Diffusion Steps</label>
-                <select class="setting-select">
-                  <option>80 steps</option>
-                  <option>50 steps</option>
-                  <option>30 steps</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Precog Integration</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Auto-enhance Video</label>
-                <input type="checkbox" class="setting-checkbox">
-              </div>
-            </div>
-          </div>
-          
-          <!-- Settings Submenu -->
-          <div class="media-submenu" id="settingsSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>General Settings</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Ollama Host</label>
-                <input type="text" id="ollamaHostInput" class="setting-input" value="http://127.0.0.1:11434" placeholder="http://127.0.0.1:11434">
-              </div>
-              <div class="setting-item">
-                <label>Theme</label>
-                <select class="setting-select" onchange="setTheme(this.value)">
-                  <option value="dark">Dark Mode</option>
-                  <option value="light">Light Mode</option>
-                  <option value="auto">Auto</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Default Model</label>
-                <select class="setting-select">
-                  <option>Claude Opus 9.6GB</option>
-                  <option>Claude Fable 9.6GB</option>
-                  <option>Claude Capybara 9.6GB</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Response Length</label>
-                <select class="setting-select">
-                  <option>Concise</option>
-                  <option>Balanced</option>
-                  <option>Detailed</option>
-                </select>
-              </div>
-              <div class="setting-item">
-                <label>Save Conversations</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Stream Responses</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Show Suggestions</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item">
-                <label>Notifications</label>
-                <input type="checkbox" checked class="setting-checkbox">
-              </div>
-              <div class="setting-item" style="border:none;padding-top:16px;">
-                <button onclick="testOllamaConnection()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
-                  Test Connection
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Network Status Submenu -->
-          <div class="media-submenu" id="networkSubmenu">
-            <div class="submenu-header">
-              <button class="back-btn" onclick="closeMediaSubmenu()">
-                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
-              </button>
-              <span>Network Status</span>
-            </div>
-            <div class="submenu-content">
-              <div class="setting-item">
-                <label>Q5 Hive Mind</label>
-                <span id="q5Status" style="color:#22c55e;font-weight:500;">● Active</span>
-              </div>
-              <div class="setting-item">
-                <label>WorldFeed API</label>
-                <span id="worldfeedStatus" style="color:#22c55e;font-weight:500;">● Active</span>
-              </div>
-              <div class="setting-item">
-                <label>Tor Network</label>
-                <span id="torStatus" style="color:#22c55e;font-weight:500;">● Active</span>
-              </div>
-              <div class="setting-item">
-                <label>Ollama Server</label>
-                <span id="ollamaStatus" style="color:#22c55e;font-weight:500;">● Active</span>
-              </div>
-              <div style="border-top:1px solid var(--border-light);margin:12px 0;padding-top:12px;">
-                <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">System Architecture</div>
-                <div style="font-size:13px;color:var(--text-primary);font-weight:500;">
-                  <div style="margin-bottom:4px;">Q5: 34³ (300+ models)</div>
-                  <div style="margin-bottom:4px;">WorldFeed: 6 data sources</div>
-                  <div style="margin-bottom:4px;">Tor: 15 research categories</div>
-                  <div>Claude: 48³ + 48⁴ + 10³¹</div>
-                </div>
-              </div>
-              <div class="setting-item" style="border:none;padding-top:8px;">
-                <button onclick="refreshNetworkStatus()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
-                  Refresh Status
-                </button>
-              </div>
-            </div>
           </div>
         </div>
         <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" id="themeToggle">
@@ -1499,77 +983,27 @@
   let isDark = true;
   let isGenerating = false;
   let selectedModel = 'sonnet';
-  let ollamaHost = 'http://127.0.0.1:11434';
   
   // ═══════════════ API ROUTING ═══════════════
-  // Use local Ollama for local file access or localhost, Vercel for production
+  // Use local Ollama for local file access, Vercel API for production
   const isLocal = window.location.protocol === 'file:' || 
                   window.location.hostname === 'localhost' || 
                   window.location.hostname === '127.0.0.1' ||
                   window.location.hostname === '';
-  const API_ROUTER = isLocal 
+  const OLLAMA_HOST = isLocal 
     ? 'http://127.0.0.1:11434' 
     : 'https://anthropic-claude-chat.vercel.app';
   
-  function isCloudModel(m) { 
-    m = (m || '').toLowerCase().trim();
-    return /^(openai|anthropic|deepseek)\//.test(m)
-        || /^(gpt|chatgpt|codex|o1|o3|o4|text-|davinci|dall-e)/.test(m)
-        || m.startsWith('claude')
-        || m === 'deepseek-chat' || m === 'deepseek-reasoner'
-        || /deepseek-v3|deepseek-r1/.test(m)
-        || /:(cloud|full|1\.6t)$/.test(m); 
-  }
-  
   function chatBase(m) { 
-    return API_ROUTER; 
+    return OLLAMA_HOST; 
   }
   
   function ollamaOptions(m, opts) {
     const next = { ...opts };
-    if (!isCloudModel(m)) {
-      next.num_ctx = 8192;
-      next.temperature = 0.7;
-      next.top_p = 0.9;
-    }
+    next.num_ctx = 8192;
+    next.temperature = 0.7;
+    next.top_p = 0.9;
     return next;
-  }
-  
-  function ollamaKeepAlive(m) {
-    return '24h';
-  }
-  
-  function routeMessages(m, list) {
-    return list.slice(-10); // Keep last 10 messages for context
-  }
-  
-  const OLLAMA_URL = API_ROUTER; // legacy alias for status checks
-  
-  function backendUrl(path) {
-    const base = (chatBase(selectedModel) || location.origin).replace(/\/$/, '');
-    return base + path;
-  }
-  
-  async function backendError(res, label = 'Chat backend') {
-    let detail = '';
-    try {
-      const clone = res.clone();
-      const type = clone.headers.get('content-type') || '';
-      if (type.includes('application/json')) {
-        const data = await clone.json();
-        detail = data.error || data.detail || data.message || JSON.stringify(data);
-      } else {
-        detail = await clone.text();
-      }
-    } catch {}
-    detail = String(detail || '').trim().replace(/\s+/g, ' ').slice(0, 500);
-    const status = `${label} ${res.status}${res.statusText ? ' ' + res.statusText : ''}`;
-    return detail ? `${status}: ${detail}` : status;
-  }
-  
-  function backendFailureMessage(err, label = 'Error') {
-    const detail = err && err.message ? err.message : String(err || 'unknown error');
-    return `[${label}: ${detail} (${backendUrl('/api/chat')})]`;
   }
 
   function renderSidebar() {
@@ -1642,9 +1076,12 @@
         <div class="message-sender">${isClaude ? 'Claude' : 'You'}</div>
         <div class="message-text">${formatMessage(msg.content)}</div>
         ${isClaude ? `<div class="message-actions">
+          <button class="msg-action-btn" onclick="speakMessage(this)" title="Speak"><i data-lucide="volume-2" style="width:14px;height:14px;"></i></button>
           <button class="msg-action-btn" onclick="copyMessage(this)" title="Copy"><i data-lucide="copy" style="width:14px;height:14px;"></i></button>
+          <button class="msg-action-btn" onclick="postToX(this)" title="Post to X"><i data-lucide="twitter" style="width:14px;height:14px;"></i></button>
+          <button class="msg-action-btn" onclick="postToYouTube(this)" title="Post to YouTube"><i data-lucide="youtube" style="width:14px;height:14px;"></i></button>
+          <button class="msg-action-btn" onclick="postToFacebook(this)" title="Post to Facebook"><i data-lucide="facebook" style="width:14px;height:14px;"></i></button>
           <button class="msg-action-btn" onclick="showToast('Response liked!')" title="Like"><i data-lucide="thumbs-up" style="width:14px;height:14px;"></i></button>
-          <button class="msg-action-btn" onclick="showToast('Feedback recorded')" title="Dislike"><i data-lucide="thumbs-down" style="width:14px;height:14px;"></i></button>
           <button class="msg-action-btn" onclick="regenerateResponse()" title="Retry"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i></button>
         </div>` : ''}
       </div>`;
@@ -1660,24 +1097,16 @@
   
   function finalizeMessage(element, content) {
     updateMessageContent(element, content);
-    // Add timestamp or other finalization logic if needed
   }
   
   function regenerateResponse() {
     if (currentConversation && currentConversation.messages.length >= 2) {
-      // Remove the last assistant message
       currentConversation.messages.pop();
-      // Get the last user message
       const lastUserMessage = currentConversation.messages[currentConversation.messages.length - 1];
       if (lastUserMessage && lastUserMessage.role === 'user') {
-        // Remove the last user message from display and regenerate
         const container = document.getElementById('chatMessages');
-        if (container.lastChild) {
-          container.removeChild(container.lastChild);
-        }
-        if (container.lastChild) {
-          container.removeChild(container.lastChild);
-        }
+        if (container.lastChild) container.removeChild(container.lastChild);
+        if (container.lastChild) container.removeChild(container.lastChild);
         generateResponse(lastUserMessage.content);
       }
     }
@@ -1693,62 +1122,6 @@
   }
 
   function escapeHtml(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
-  function renderSidebar() {
-    document.getElementById('todayChats').innerHTML = conversations.filter(c => c.time === 'today').map(c => createNavItem(c)).join('');
-    document.getElementById('weekChats').innerHTML = conversations.filter(c => c.time === 'week').map(c => createNavItem(c)).join('');
-  }
-
-  function createNavItem(c) {
-    const isActive = currentConversation && currentConversation.id === c.id;
-    return `<div class="nav-item ${isActive ? 'active' : ''}" onclick="loadConversation(${c.id})">
-      <i data-lucide="message-square" style="width:16px;height:16px;flex-shrink:0;"></i>
-      <span class="nav-item-text">${c.title}</span>
-      <span class="delete-btn" onclick="event.stopPropagation(); deleteConversation(${c.id})">
-        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
-      </span>
-    </div>`;
-  }
-
-  function loadConversation(id) {
-    const conv = conversations.find(c => c.id === id);
-    if (!conv) return;
-    currentConversation = conv;
-    renderSidebar();
-    renderMessages();
-    if (window.innerWidth < 768) toggleSidebar();
-  }
-
-  function deleteConversation(id) {
-    conversations = conversations.filter(c => c.id !== id);
-    if (currentConversation && currentConversation.id === id) { currentConversation = null; showWelcome(); }
-    renderSidebar(); lucide.createIcons();
-  }
-
-  function newChat() {
-    currentConversation = null;
-    showWelcome();
-    document.getElementById('chatInput').value = '';
-    updateSendBtn();
-    if (window.innerWidth < 768) toggleSidebar();
-  }
-
-  function showWelcome() {
-    document.getElementById('welcomeScreen').style.display = 'flex';
-    document.getElementById('chatMessages').style.display = 'none';
-    document.getElementById('chatMessages').innerHTML = '';
-  }
-
-  function renderMessages() {
-    if (!currentConversation || currentConversation.messages.length === 0) { showWelcome(); return; }
-    document.getElementById('welcomeScreen').style.display = 'none';
-    const container = document.getElementById('chatMessages');
-    container.style.display = 'flex';
-    container.innerHTML = '';
-    currentConversation.messages.forEach(msg => container.appendChild(createMessageElement(msg)));
-    lucide.createIcons();
-    scrollToBottom();
-  }
 
   function sendMessage() {
     const input = document.getElementById('chatInput');
@@ -1769,6 +1142,11 @@
     generateResponse(text);
   }
 
+  // Make sure send button updates on input
+  document.getElementById('chatInput').addEventListener('input', function() {
+    updateSendBtn();
+  });
+
   async function generateResponse(userText) {
     isGenerating = true;
     const container = document.getElementById('chatMessages');
@@ -1787,10 +1165,10 @@
     try {
       // Map model selection to actual model names
       const modelMapping = {
-            'sonnet': 'claude-sonnet-4.7:latest',
-            'opus': 'claude-opus-4.8:latest',
-            'fable': 'claude-fable-5:latest',
-            'capybara': 'claude-capybara-5:latest'
+        'sonnet': 'claude-sonnet-4.7:latest',
+        'opus': 'claude-opus-4.8:latest',
+        'fable': 'claude-fable-5:latest',
+        'capybara': 'claude-capybara-5:latest'
       };
       
       const modelName = modelMapping[selectedModel] || 'claude-sonnet-4.7:latest';
@@ -1872,7 +1250,7 @@
       console.error('Error generating response:', error);
       typingDiv.remove();
       
-      const errorMessage = `I encountered an error connecting to the AI model. Please ensure:\n\n1. The Oroboros-Anthropic service is running\n2. The selected model is available\n3. Your internet connection is stable\n\nError details: ${error.message}\n\nWould you like me to try again or help you troubleshoot the connection?`;
+      const errorMessage = `I encountered an error connecting to Ollama. Please ensure:\n\n1. Ollama is running on port 11434\n2. The selected model is available\n3. Run 'ollama list' to check installed models\n\nError details: ${error.message}\n\nWould you like me to try again?`;
       
       currentConversation.messages.push({ role: 'assistant', content: errorMessage });
       container.appendChild(createMessageElement({ role: 'assistant', content: errorMessage }));
@@ -1883,15 +1261,6 @@
       renderSidebar();
       lucide.createIcons();
     }
-  }
-
-  function generateGenericResponse(text) {
-    const r = [
-      `Here are my thoughts on "${text.substring(0, 40)}...":\n\nThis is an interesting topic that touches on several important areas. Let me break it down:\n\n**Key Considerations:**\n1. The context and background matter significantly\n2. There are multiple valid perspectives to consider\n3. The practical implications depend on your specific situation\n\n**My Recommendation:**\nStart by clearly defining your goals, then work through the problem systematically.`,
-      `Great topic! Let me share some insights:\n\n**Understanding the basics:** Every complex question has simpler components underneath.\n\n**What I'd suggest:**\n- First, identify the core question you're trying to answer\n- Gather relevant information and context\n- Consider different angles and perspectives\n- Test your assumptions\n\nWould you like me to explore any particular aspect in more detail?`,
-      `I appreciate you bringing this up! Here's how I'd approach it:\n\n**The short answer:** It depends on your specific context and goals.\n\n**The longer answer:** There are several factors at play here, and the best approach will depend on what you're trying to achieve. Let me outline the key considerations and help you work through them.\n\nFeel free to share more details about your situation.`
-    ];
-    return r[Math.floor(Math.random() * r.length)];
   }
 
   function scrollToBottom() { const c = document.getElementById('chatArea'); setTimeout(() => c.scrollTop = c.scrollHeight, 50); }
@@ -1908,79 +1277,332 @@
 
   function toggleModelDropdown() { document.getElementById('modelDropdown').classList.toggle('open'); }
 
-  function toggleMediaDropdown() { document.getElementById('mediaDropdown').classList.toggle('open'); }
-
-  function toggleMediaSubmenu(type) {
-    document.getElementById('mediaDropdown').classList.remove('open');
-    const submenu = document.getElementById(type + 'Submenu');
-    if (submenu) {
-      submenu.classList.add('open');
-      lucide.createIcons();
-    }
+  function selectModel(model, name) {
+    selectedModel = model;
+    document.getElementById('currentModelName').textContent = name;
+    document.querySelectorAll('.model-option').forEach(el => el.classList.toggle('selected', el.dataset.model === model));
+    toggleModelDropdown(); showToast(`Switched to ${name}`);
   }
 
-  function closeMediaSubmenu() {
-    document.querySelectorAll('.media-submenu').forEach(el => el.classList.remove('open'));
-  }
-
-  function setTheme(theme) {
-    if (theme === 'dark') {
-      isDark = true;
-      document.body.classList.add('dark');
-      document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
-    } else if (theme === 'light') {
-      isDark = false;
-      document.body.classList.remove('dark');
-      document.getElementById('themeIcon').setAttribute('data-lucide', 'sun');
-    } else {
-      // Auto - could implement system preference detection
-      isDark = true;
-      document.body.classList.add('dark');
-      document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
-    }
+  function toggleTheme() {
+    isDark = !isDark; document.body.classList.toggle('dark', isDark);
+    document.getElementById('themeIcon').setAttribute('data-lucide', isDark ? 'moon' : 'sun');
     lucide.createIcons();
   }
 
-  async function testOllamaConnection() {
-    const hostInput = document.getElementById('ollamaHostInput');
-    const testHost = hostInput.value.trim() || ollamaHost;
+  // Media Panel Functions
+  let currentMediaTab = 'voice';
+  
+  function toggleMediaPanel() {
+    const panel = document.getElementById('mediaPanel');
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      lucide.createIcons();
+    }
+  }
+  
+  function switchMediaTab(tab) {
+    currentMediaTab = tab;
+    document.querySelectorAll('.media-tab').forEach(el => el.classList.remove('active'));
+    document.querySelector(`.media-tab[data-tab="${tab}"]`).classList.add('active');
+    document.querySelectorAll('.media-content').forEach(el => el.classList.remove('active'));
+    document.getElementById(`media-${tab}`).classList.add('active');
+  }
+  
+  // Windows Audio Voices
+  async function speakText(text) {
+    if (!text) text = document.getElementById('voiceTextInput').value;
+    if (!text) return showToast('Enter text to speak');
     
-    showToast('Testing connection to Oroboros-Anthropic...');
+    const voice = document.getElementById('voiceSelect').value;
+    const rate = parseFloat(document.getElementById('voiceRate').value);
     
     try {
-      const response = await fetch(`${chatBase('claude-opus:latest')}/api/tags`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voices = speechSynthesis.getVoices();
+      utterance.voice = voices.find(v => v.name === voice) || voices[0];
+      utterance.rate = rate;
+      speechSynthesis.speak(utterance);
+      showToast('Speaking...');
+    } catch (e) {
+      showToast('Error: ' + e.message);
+    }
+  }
+  
+  function loadVoices() {
+    const voices = speechSynthesis.getVoices();
+    const select = document.getElementById('voiceSelect');
+    select.innerHTML = '';
+    voices.forEach(voice => {
+      const option = document.createElement('option');
+      option.value = voice.name;
+      option.textContent = `${voice.name} (${voice.lang})`;
+      select.appendChild(option);
+    });
+  }
+  
+  // Image Generation
+  async function generateImage() {
+    const prompt = document.getElementById('imagePrompt').value;
+    if (!prompt) return showToast('Enter an image prompt');
+    
+    showToast('Generating image...');
+    
+    // Call Oroboros Video Pipeline for image generation
+    try {
+      const response = await fetch('http://localhost:8920/api/image/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: prompt,
+          model: document.getElementById('imageModel').value,
+          width: parseInt(document.getElementById('imageWidth').value),
+          height: parseInt(document.getElementById('imageHeight').value),
+          steps: parseInt(document.getElementById('imageSteps').value)
+        })
       });
-
+      
       if (response.ok) {
-        showToast('✓ Connected to Oroboros-Anthropic!');
-        updateNetworkStatus(true);
+        const data = await response.json();
+        document.getElementById('imageOutput').src = data.url || data.image;
+        showToast('Image generated!');
       } else {
-        showToast('✗ Connection failed');
-        updateNetworkStatus(false);
+        // Fallback: Use Stable Diffusion WebUI
+        const sdResponse = await fetch('http://localhost:7860/sdapi/v1/txt2img', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: prompt,
+            steps: 20,
+            width: 512,
+            height: 512
+          })
+        });
+        if (sdResponse.ok) {
+          const sdData = await sdResponse.json();
+          document.getElementById('imageOutput').src = 'data:image/png;base64,' + sdData.images[0];
+          showToast('Image generated via SD WebUI!');
+        } else {
+          showToast('Image generation unavailable - start SD WebUI or Oroboros Pipeline');
+        }
       }
     } catch (e) {
-      showToast('✗ Connection failed: ' + e.message);
-      updateNetworkStatus(false);
+      showToast('Error: ' + e.message);
     }
   }
-
-  function updateNetworkStatus(connected) {
-    const ollamaStatus = document.getElementById('ollamaStatus');
-    if (ollamaStatus) {
-      ollamaStatus.textContent = connected ? '● Active' : '● Inactive';
-      ollamaStatus.style.color = connected ? '#22c55e' : '#ef4444';
-    }
-  }
-
-  async function refreshNetworkStatus() {
-    showToast('Refreshing network status...');
+  
+  // Video Generation
+  async function generateVideo() {
+    const prompt = document.getElementById('videoPrompt').value;
+    if (!prompt) return showToast('Enter a video prompt');
     
-    // Update Q5 status
-    const q5Status = document.getElementById('q5Status');
+    showToast('Generating video...');
+    
+    try {
+      // Call Oroboros Video Diffusion Pipeline
+      const response = await fetch('http://localhost:8920/api/video/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: prompt,
+          model: document.getElementById('videoModel').value,
+          frames: parseInt(document.getElementById('videoFrames').value),
+          fps: parseInt(document.getElementById('videoFps').value),
+          width: parseInt(document.getElementById('videoWidth').value),
+          height: parseInt(document.getElementById('videoHeight').value)
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById('videoOutput').src = data.url || data.video;
+        document.getElementById('videoOutput').load();
+        showToast('Video generated!');
+      } else {
+        showToast('Video generation unavailable - start Oroboros Video Pipeline on port 8920');
+      }
+    } catch (e) {
+      showToast('Error: ' + e.message);
+    }
+  }
+  
+  // Webpage Design
+  async function generateWebpage() {
+    const prompt = document.getElementById('webpagePrompt').value;
+    if (!prompt) return showToast('Enter a webpage design prompt');
+    
+    showToast('Generating webpage design...');
+    
+    // Use current model for webpage generation
+    const modelMapping = {
+      'sonnet': 'claude-sonnet-4.7:latest',
+      'opus': 'claude-opus-4.8:latest',
+      'fable': 'claude-fable-5:latest',
+      'capybara': 'claude-capybara-5:latest'
+    };
+    const modelName = modelMapping[selectedModel] || 'claude-sonnet-4.7:latest';
+    
+    try {
+      const response = await fetch('http://127.0.0.1:11434/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: modelName,
+          messages: [{
+            role: 'user',
+            content: `Generate a complete HTML webpage with embedded CSS and JavaScript for: ${prompt}
+
+Requirements:
+- Modern, responsive design
+- Clean CSS with variables for theming
+- Interactive JavaScript features
+- Accessibility considerations
+- Mobile-first approach
+
+Return ONLY the complete HTML code, no explanations.`
+          }],
+          stream: false
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        const html = data.message.content;
+        document.getElementById('webpageOutput').value = html;
+        document.getElementById('webpagePreview').srcdoc = html;
+        showToast('Webpage generated!');
+      } else {
+        showToast('Error generating webpage');
+      }
+    } catch (e) {
+      showToast('Error: ' + e.message);
+    }
+  }
+  
+  function copyWebpageCode() {
+    const code = document.getElementById('webpageOutput').value;
+    navigator.clipboard.writeText(code);
+    showToast('Code copied to clipboard!');
+  }
+  
+  // Initialize voices
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  setTimeout(loadVoices, 100);
+
+  // Initialize dark mode by default
+  document.body.classList.add('dark');
+  document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
+
+  function copyMessage(btn) { navigator.clipboard.writeText(btn.closest('.message-content').querySelector('.message-text').innerText).then(() => showToast('Copied to clipboard')); }
+  
+  // Voice-to-Voice Functions
+  function speakMessage(btn) {
+    const text = btn.closest('.message-content').querySelector('.message-text').innerText;
+    if (!text) return showToast('No text to speak');
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+    utterance.voice = voices.find(v => v.name.includes('Microsoft') || v.name.includes('Google')) || voices[0];
+    utterance.rate = 1.0;
+    speechSynthesis.speak(utterance);
+    showToast('Speaking response...');
+  }
+  
+  // Social Media Posting Functions
+  function postToX(btn) {
+    const text = btn.closest('.message-content').querySelector('.message-text').innerText;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text.substring(0, 280))}`;
+    window.open(url, '_blank');
+    showToast('Opening X...');
+  }
+  
+  function postToYouTube(btn) {
+    const text = btn.closest('.message-content').querySelector('.message-text').innerText;
+    // YouTube doesn't have direct post API, open YouTube Studio
+    const url = 'https://studio.youtube.com/';
+    navigator.clipboard.writeText(text);
+    showToast('Copied to clipboard - Open YouTube Studio to post');
+    window.open(url, '_blank');
+  }
+  
+  function postToFacebook(btn) {
+    const text = btn.closest('.message-content').querySelector('.message-text').innerText;
+    const url = `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(text.substring(0, 500))}`;
+    window.open(url, '_blank');
+    showToast('Opening Facebook...');
+  }
+  
+  // Media Dropdown Functions
+  function toggleMediaDropdown() {
+    const dropdown = document.getElementById('mediaDropdown');
+    dropdown.classList.toggle('open');
+  }
+  
+  function openMediaTab(tab) {
+    toggleMediaDropdown();
+    // Open media panel with specific tab
+    const panel = document.getElementById('mediaPanel');
+    panel.classList.add('open');
+    switchMediaTab(tab);
+    lucide.createIcons();
+  }
+  function copyCode(btn) { navigator.clipboard.writeText(btn.previousElementSibling.textContent).then(() => { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 2000); }); }
+  function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+
+  // Network Status Functions
+  async function showNetworkStatus() {
+    const statusHtml = `
+      <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;" onclick="this.remove()">
+        <div style="background:var(--bg-primary);border-radius:16px;padding:24px;max-width:400px;width:90%;box-shadow:var(--shadow-lg);" onclick="event.stopPropagation()">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:18px;font-weight:600;">Network Status</h3>
+            <button onclick="this.closest('div[style*=position:fixed]').remove()" style="background:none;border:none;cursor:pointer;padding:4px;">
+              <i data-lucide="x" style="width:20px;height:20px;"></i>
+            </button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-light);">
+              <span style="font-weight:500;">Q5 Hive Mind</span>
+              <span id="q5StatusOffline" style="color:#22c55e;font-weight:500;">● Active</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-light);">
+              <span style="font-weight:500;">WorldFeed API</span>
+              <span id="worldfeedStatusOffline" style="color:#22c55e;font-weight:500;">● Active</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-light);">
+              <span style="font-weight:500;">Tor Network</span>
+              <span id="torStatusOffline" style="color:#22c55e;font-weight:500;">● Active</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-light);">
+              <span style="font-weight:500;">Ollama Server</span>
+              <span id="ollamaStatusOffline" style="color:#22c55e;font-weight:500;">● Active</span>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border-light);">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">System Architecture</div>
+            <div style="font-size:13px;color:var(--text-primary);font-weight:500;">
+              <div style="margin-bottom:4px;">Q5: 34³ (300+ models)</div>
+              <div style="margin-bottom:4px;">WorldFeed: 6 data sources</div>
+              <div style="margin-bottom:4px;">Tor: 15 research categories</div>
+              <div>Claude: 48³ + 48⁴ + 10³¹</div>
+            </div>
+          </div>
+          <button onclick="refreshNetworkStatusOffline()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;margin-top:16px;">
+            Refresh Status
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', statusHtml);
+    lucide.createIcons();
+    refreshNetworkStatusOffline();
+  }
+
+  async function refreshNetworkStatusOffline() {
+    // Check Q5
+    const q5Status = document.getElementById('q5StatusOffline');
     try {
       const q5Response = await fetch('http://localhost:8101/health', { 
         method: 'GET',
@@ -1997,8 +1619,8 @@
       }
     }
     
-    // Update WorldFeed status
-    const worldfeedStatus = document.getElementById('worldfeedStatus');
+    // Check WorldFeed
+    const worldfeedStatus = document.getElementById('worldfeedStatusOffline');
     try {
       const wfResponse = await fetch('http://localhost:8100/status', {
         method: 'GET',
@@ -2015,10 +1637,10 @@
       }
     }
     
-    // Update Ollama status
-    const ollamaStatus = document.getElementById('ollamaStatus');
+    // Check Ollama
+    const ollamaStatus = document.getElementById('ollamaStatusOffline');
     try {
-      const ollamaResponse = await fetch(`${chatBase('claude-opus:latest')}/api/tags`, {
+      const ollamaResponse = await fetch('http://127.0.0.1:11434/api/tags', {
         method: 'GET',
         signal: AbortSignal.timeout(5000)
       });
@@ -2033,10 +1655,9 @@
       }
     }
     
-    // Tor Network status (file-based, assume active if Q5 is active)
-    const torStatus = document.getElementById('torStatus');
+    // Tor Network status (file-based)
+    const torStatus = document.getElementById('torStatusOffline');
     if (torStatus) {
-      // Tor network status is determined by Q5 availability
       const isTorActive = q5Status && q5Status.textContent === '● Active';
       torStatus.textContent = isTorActive ? '● Active' : '● Inactive';
       torStatus.style.color = isTorActive ? '#22c55e' : '#ef4444';
@@ -2044,133 +1665,449 @@
     
     showToast('Network status refreshed');
   }
-        const data = await response.json();
-        const modelCount = data.models?.length || 0;
-        ollamaHost = testHost;
-        showToast(`✓ Connected! Found ${modelCount} models`);
-        
-        // Update model dropdown with available models
-        updateModelDropdown(data.models);
-      } else {
-        showToast(`✗ Connection failed: ${response.status}`);
-      }
-    } catch (error) {
-      showToast(`✗ Connection error: ${error.message}`);
-    }
-  }
-
-  function updateModelDropdown(models) {
-    if (!models || models.length === 0) return;
-    
-    // Filter for Claude models
-    const claudeModels = models.filter(m => 
-      m.name.toLowerCase().includes('claude') || 
-      m.name.toLowerCase().includes('opus') ||
-      m.name.toLowerCase().includes('fable') ||
-      m.name.toLowerCase().includes('capybara')
-    );
-    
-    if (claudeModels.length > 0) {
-      console.log('Available Claude models:', claudeModels.map(m => m.name));
-    }
-  }
-
-  function selectModel(model, name) {
-    selectedModel = model;
-    document.getElementById('currentModelName').textContent = name;
-    document.querySelectorAll('.model-option').forEach(el => el.classList.toggle('selected', el.dataset.model === model));
-    toggleModelDropdown(); showToast(`Switched to ${name}`);
-  }
-
-  function toggleTheme() {
-    isDark = !isDark; document.body.classList.toggle('dark', isDark);
-    document.getElementById('themeIcon').setAttribute('data-lucide', isDark ? 'moon' : 'sun');
-    lucide.createIcons();
-  }
-
-  // Initialize dark mode by default
-  document.body.classList.add('dark');
-  document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
-
-  function copyMessage(btn) { navigator.clipboard.writeText(btn.closest('.message-content').querySelector('.message-text').innerText).then(() => showToast('Copied to clipboard')); }
-  function copyCode(btn) { navigator.clipboard.writeText(btn.previousElementSibling.textContent).then(() => { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 2000); }); }
-  function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
 
   document.addEventListener('click', (e) => { 
     const d = document.getElementById('modelDropdown'), b = document.getElementById('modelSelectorBtn'); 
     if (!d.contains(e.target) && !b.contains(e.target)) d.classList.remove('open');
-    const md = document.getElementById('mediaDropdown'), mb = document.getElementById('mediaBtn');
-    if (!md.contains(e.target) && !mb.contains(e.target)) {
-      md.classList.remove('open');
-      // Close all submenus if clicking outside
-      if (!e.target.closest('.media-submenu')) {
-        document.querySelectorAll('.media-submenu').forEach(el => el.classList.remove('open'));
-      }
-    }
-  });
-
-  // Update Ollama host when input changes
-  document.getElementById('ollamaHostInput')?.addEventListener('change', function() {
-    ollamaHost = this.value.trim() || 'http://127.0.0.1:11434';
   });
 
   renderSidebar(); lucide.createIcons();
   
   // Start with sidebar closed
   document.getElementById('sidebar').classList.add('collapsed');
-  
-  // ═══════════════ AGENT STATE MANAGEMENT ═══════════════
-  // Save conversations to localStorage periodically
-  setInterval(function() {
-    try {
-      localStorage.setItem('claude_conversations', JSON.stringify(conversations));
-    } catch(e) {}
-  }, 30000);
-  
-  // Save selected model
-  const originalSelectModel = window.selectModel;
-  window.selectModel = function(model, name) {
-    if (originalSelectModel) originalSelectModel(model, name);
-    try {
-      localStorage.setItem('claude_selected_model', model);
-    } catch(e) {}
-  };
-  
-  // Load saved model on startup
-  try {
-    const savedModel = localStorage.getItem('claude_selected_model');
-    if (savedModel && ['opus', 'fable', 'capybara'].includes(savedModel)) {
-      selectedModel = savedModel;
-      const modelNames = {
-        'opus': 'Claude Opus 4.7',
-        'fable': 'Claude Fable 5',
-        'capybara': 'Claude Capybara 5'
-      };
-      document.getElementById('currentModelName').textContent = modelNames[savedModel];
-      document.querySelectorAll('.model-option').forEach(el => {
-        el.classList.toggle('selected', el.dataset.model === savedModel);
-      });
-    }
-  } catch(e) {}
-  
-  // Save sidebar state
-  const originalToggleSidebar = window.toggleSidebar;
-  window.toggleSidebar = function() {
-    if (originalToggleSidebar) originalToggleSidebar();
-    try {
-      const sidebar = document.getElementById('sidebar');
-      localStorage.setItem('claude_sidebar_state', sidebar.classList.contains('collapsed') ? 'collapsed' : 'expanded');
-    } catch(e) {}
-  };
-  
-  // Load sidebar state
-  try {
-    const sidebarState = localStorage.getItem('claude_sidebar_state');
-    if (sidebarState === 'expanded') {
-      document.getElementById('sidebar').classList.remove('collapsed');
-    }
-  } catch(e) {}
 </script>
+
+<!-- Media Panel -->
+<div id="mediaPanel" class="media-panel">
+  <div class="media-panel-header">
+    <h3>Media Studio</h3>
+    <button class="icon-btn" onclick="toggleMediaPanel()">
+      <i data-lucide="x" style="width:18px;height:18px;"></i>
+    </button>
+  </div>
+  
+  <div class="media-tabs">
+    <button class="media-tab active" data-tab="voice" onclick="switchMediaTab('voice')">
+      <i data-lucide="mic" style="width:16px;height:16px;"></i>
+      <span>Voice</span>
+    </button>
+    <button class="media-tab" data-tab="image" onclick="switchMediaTab('image')">
+      <i data-lucide="image" style="width:16px;height:16px;"></i>
+      <span>Image</span>
+    </button>
+    <button class="media-tab" data-tab="video" onclick="switchMediaTab('video')">
+      <i data-lucide="video" style="width:16px;height:16px;"></i>
+      <span>Video</span>
+    </button>
+    <button class="media-tab" data-tab="webpage" onclick="switchMediaTab('webpage')">
+      <i data-lucide="layout" style="width:16px;height:16px;"></i>
+      <span>Web</span>
+    </button>
+  </div>
+  
+  <!-- Voice Tab -->
+  <div id="media-voice" class="media-content active">
+    <div class="media-section">
+      <label class="media-label">Windows Audio Voice</label>
+      <select id="voiceSelect" class="media-select">
+        <option>Loading voices...</option>
+      </select>
+    </div>
+    <div class="media-section">
+      <label class="media-label">Speech Rate</label>
+      <input type="range" id="voiceRate" min="0.5" max="2" step="0.1" value="1" class="media-range">
+      <span id="voiceRateValue">1.0x</span>
+    </div>
+    <div class="media-section">
+      <label class="media-label">Text to Speak</label>
+      <textarea id="voiceTextInput" class="media-textarea" placeholder="Enter text to speak..."></textarea>
+    </div>
+    <button class="media-btn" onclick="speakText()">
+      <i data-lucide="volume-2" style="width:16px;height:16px;"></i>
+      Speak
+    </button>
+  </div>
+  
+  <!-- Image Tab -->
+  <div id="media-image" class="media-content">
+    <div class="media-section">
+      <label class="media-label">Image Model</label>
+      <select id="imageModel" class="media-select">
+        <option value="sdxl">SDXL (Oroboros Pipeline)</option>
+        <option value="sd15">Stable Diffusion 1.5</option>
+        <option value="controlnet">ControlNet</option>
+      </select>
+    </div>
+    <div class="media-row">
+      <div class="media-section half">
+        <label class="media-label">Width</label>
+        <input type="number" id="imageWidth" value="512" class="media-input">
+      </div>
+      <div class="media-section half">
+        <label class="media-label">Height</label>
+        <input type="number" id="imageHeight" value="512" class="media-input">
+      </div>
+    </div>
+    <div class="media-section">
+      <label class="media-label">Steps</label>
+      <input type="range" id="imageSteps" min="10" max="50" value="20" class="media-range">
+      <span id="imageStepsValue">20</span>
+    </div>
+    <div class="media-section">
+      <label class="media-label">Prompt</label>
+      <textarea id="imagePrompt" class="media-textarea" placeholder="Describe the image to generate..."></textarea>
+    </div>
+    <button class="media-btn" onclick="generateImage()">
+      <i data-lucide="image" style="width:16px;height:16px;"></i>
+      Generate Image
+    </button>
+    <div class="media-output">
+      <img id="imageOutput" src="" alt="Generated image will appear here">
+    </div>
+  </div>
+  
+  <!-- Video Tab -->
+  <div id="media-video" class="media-content">
+    <div class="media-section">
+      <label class="media-label">Video Engine</label>
+      <select id="videoModel" class="media-select">
+        <option value="oroboros-diffusion">Oroboros Video Diffusion</option>
+        <option value="animate-diff">AnimateDiff</option>
+        <option value="sdxl-video">SDXL Video</option>
+      </select>
+    </div>
+    <div class="media-row">
+      <div class="media-section half">
+        <label class="media-label">Frames</label>
+        <input type="number" id="videoFrames" value="24" class="media-input">
+      </div>
+      <div class="media-section half">
+        <label class="media-label">FPS</label>
+        <input type="number" id="videoFps" value="8" class="media-input">
+      </div>
+    </div>
+    <div class="media-row">
+      <div class="media-section half">
+        <label class="media-label">Width</label>
+        <input type="number" id="videoWidth" value="512" class="media-input">
+      </div>
+      <div class="media-section half">
+        <label class="media-label">Height</label>
+        <input type="number" id="videoHeight" value="512" class="media-input">
+      </div>
+    </div>
+    <div class="media-section">
+      <label class="media-label">Prompt</label>
+      <textarea id="videoPrompt" class="media-textarea" placeholder="Describe the video to generate..."></textarea>
+    </div>
+    <button class="media-btn" onclick="generateVideo()">
+      <i data-lucide="video" style="width:16px;height:16px;"></i>
+      Generate Video
+    </button>
+    <div class="media-output">
+      <video id="videoOutput" controls muted loop></video>
+    </div>
+  </div>
+  
+  <!-- Webpage Tab -->
+  <div id="media-webpage" class="media-content">
+    <div class="media-section">
+      <label class="media-label">Design Prompt</label>
+      <textarea id="webpagePrompt" class="media-textarea" placeholder="Describe the webpage to design..."></textarea>
+    </div>
+    <button class="media-btn" onclick="generateWebpage()">
+      <i data-lucide="layout" style="width:16px;height:16px;"></i>
+      Generate Webpage
+    </button>
+    <div class="media-section">
+      <label class="media-label">Generated Code</label>
+      <textarea id="webpageOutput" class="media-code" readonly placeholder="Generated HTML will appear here..."></textarea>
+    </div>
+    <button class="media-btn secondary" onclick="copyWebpageCode()">
+      <i data-lucide="copy" style="width:16px;height:16px;"></i>
+      Copy Code
+    </button>
+    <div class="media-section">
+      <label class="media-label">Preview</label>
+      <iframe id="webpagePreview" class="media-preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<style>
+  .media-panel {
+    position: fixed;
+    right: -420px;
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: var(--bg-primary);
+    border-left: 1px solid var(--border);
+    z-index: 100;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .media-panel.open {
+    right: 0;
+  }
+  
+  .media-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .media-panel-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .media-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 8px;
+  }
+  
+  .media-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  
+  .media-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+  
+  .media-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  
+  .media-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: none;
+  }
+  
+  .media-content.active {
+    display: block;
+  }
+  
+  .media-section {
+    margin-bottom: 16px;
+  }
+  
+  .media-section.half {
+    flex: 1;
+  }
+  
+  .media-row {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .media-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .media-select, .media-input, .media-textarea, .media-code {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  .media-textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  .media-code {
+    min-height: 120px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+  }
+  
+  .media-range {
+    width: calc(100% - 50px);
+    margin-right: 8px;
+  }
+  
+  .media-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 12px;
+  }
+  
+  .media-btn:hover {
+    background: var(--accent-hover);
+  }
+  
+  .media-btn.secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  
+  .media-btn.secondary:hover {
+    background: var(--bg-hover);
+  }
+  
+  .media-output {
+    width: 100%;
+    min-height: 200px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+  
+  .media-output img, .media-output video {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+  }
+  
+  .media-preview {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+  }
+  
+  /* Media Dropdown Styles */
+  .media-dropdown-container {
+    position: relative;
+  }
+  
+  .media-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 100;
+    min-width: 180px;
+    overflow: hidden;
+  }
+  
+  .media-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .media-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+  
+  .media-dropdown-item:hover {
+    background: var(--bg-hover);
+    color: var(--accent);
+  }
+  
+  .media-dropdown-item i {
+    color: var(--text-secondary);
+  }
+  
+  .media-dropdown-item:hover i {
+    color: var(--accent);
+  }
+  
+  /* Message Actions Enhanced */
+  .message-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  
+  .message:hover .message-actions {
+    opacity: 1;
+  }
+  
+  .msg-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+  }
+  
+  .msg-action-btn:hover {
+    background: var(--bg-hover);
+    color: var(--accent);
+  }
+</style>
 
 </body>
 </html>

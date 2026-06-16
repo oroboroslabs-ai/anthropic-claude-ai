@@ -8,7 +8,7 @@
     "OLLAMA_HOST": "https://desktop-f4s5n12.taild4a403.ts.net"
   },
   "rewrites": [
-    { "source": "/", "destination": "/chat-anthropic.html" },
+    { "source": "/", "destination": "/index.html" },
     { "source": "/api/chat", "destination": "/api/chat" },
     { "source": "/api/models", "destination": "/api/models" },
     { "source": "/api/status", "destination": "/api/status" }
