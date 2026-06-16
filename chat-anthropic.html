@@ -1048,6 +1048,13 @@
               </div>
               <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
             </button>
+            <button class="model-option" data-model="capybara-48q4" onclick="selectModel('capybara-48q4', 'Claude Capybara 5 48q4')">
+              <div class="model-option-info">
+                <span class="model-option-name">Claude Capybara 5 48q4</span>
+                <span class="model-option-desc">48⁴ Geometric Sovereign - 5.3×10⁹ states</span>
+              </div>
+              <i data-lucide="check" class="model-option-check" style="width:16px;height:16px;"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -1792,7 +1799,8 @@
             'sonnet': 'claude-sonnet-4.7:latest',
             'opus': 'claude-opus-4.8:latest',
             'fable': 'claude-fable-5:latest',
-            'capybara': 'claude-capybara-5:latest'
+            'capybara': 'claude-capybara-5:latest',
+            'capybara-48q4': 'claude-capybara-5-48q4:latest'
       };
       
       const modelName = modelMapping[selectedModel] || 'claude-sonnet-4.7:latest';
