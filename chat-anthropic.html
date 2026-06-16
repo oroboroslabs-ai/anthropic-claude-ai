@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+<script src="q5_worldfeed_integration.js"></script>
 <style>
   :root {
     --bg-primary: #FFFFFF;
@@ -1087,6 +1088,12 @@
               <span>Settings</span>
               <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
             </button>
+            <div style="border-top:1px solid var(--border-light);margin:4px 0;"></div>
+            <button class="media-option" onclick="toggleMediaSubmenu('network')" title="Network Status">
+              <i data-lucide="wifi" style="width:16px;height:16px;"></i>
+              <span>Network Status</span>
+              <i data-lucide="chevron-right" style="width:14px;height:14px;color:var(--text-muted);"></i>
+            </button>
           </div>
           
           <!-- Voice Submenu -->
@@ -1367,6 +1374,48 @@
               <div class="setting-item" style="border:none;padding-top:16px;">
                 <button onclick="testOllamaConnection()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
                   Test Connection
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Network Status Submenu -->
+          <div class="media-submenu" id="networkSubmenu">
+            <div class="submenu-header">
+              <button class="back-btn" onclick="closeMediaSubmenu()">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+              </button>
+              <span>Network Status</span>
+            </div>
+            <div class="submenu-content">
+              <div class="setting-item">
+                <label>Q5 Hive Mind</label>
+                <span id="q5Status" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>WorldFeed API</label>
+                <span id="worldfeedStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>Tor Network</label>
+                <span id="torStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div class="setting-item">
+                <label>Ollama Server</label>
+                <span id="ollamaStatus" style="color:#22c55e;font-weight:500;">● Active</span>
+              </div>
+              <div style="border-top:1px solid var(--border-light);margin:12px 0;padding-top:12px;">
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">System Architecture</div>
+                <div style="font-size:13px;color:var(--text-primary);font-weight:500;">
+                  <div style="margin-bottom:4px;">Q5: 34³ (300+ models)</div>
+                  <div style="margin-bottom:4px;">WorldFeed: 6 data sources</div>
+                  <div style="margin-bottom:4px;">Tor: 15 research categories</div>
+                  <div>Claude: 48³ + 48⁴ + 10³¹</div>
+                </div>
+              </div>
+              <div class="setting-item" style="border:none;padding-top:8px;">
+                <button onclick="refreshNetworkStatus()" style="width:100%;padding:10px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">
+                  Refresh Status
                 </button>
               </div>
             </div>
@@ -1909,6 +1958,94 @@
       });
 
       if (response.ok) {
+        showToast('✓ Connected to Oroboros-Anthropic!');
+        updateNetworkStatus(true);
+      } else {
+        showToast('✗ Connection failed');
+        updateNetworkStatus(false);
+      }
+    } catch (e) {
+      showToast('✗ Connection failed: ' + e.message);
+      updateNetworkStatus(false);
+    }
+  }
+
+  function updateNetworkStatus(connected) {
+    const ollamaStatus = document.getElementById('ollamaStatus');
+    if (ollamaStatus) {
+      ollamaStatus.textContent = connected ? '● Active' : '● Inactive';
+      ollamaStatus.style.color = connected ? '#22c55e' : '#ef4444';
+    }
+  }
+
+  async function refreshNetworkStatus() {
+    showToast('Refreshing network status...');
+    
+    // Update Q5 status
+    const q5Status = document.getElementById('q5Status');
+    try {
+      const q5Response = await fetch('http://localhost:8101/health', { 
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (q5Status) {
+        q5Status.textContent = q5Response.ok ? '● Active' : '● Inactive';
+        q5Status.style.color = q5Response.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (q5Status) {
+        q5Status.textContent = '● Inactive';
+        q5Status.style.color = '#ef4444';
+      }
+    }
+    
+    // Update WorldFeed status
+    const worldfeedStatus = document.getElementById('worldfeedStatus');
+    try {
+      const wfResponse = await fetch('http://localhost:8100/status', {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (worldfeedStatus) {
+        worldfeedStatus.textContent = wfResponse.ok ? '● Active' : '● Inactive';
+        worldfeedStatus.style.color = wfResponse.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (worldfeedStatus) {
+        worldfeedStatus.textContent = '● Inactive';
+        worldfeedStatus.style.color = '#ef4444';
+      }
+    }
+    
+    // Update Ollama status
+    const ollamaStatus = document.getElementById('ollamaStatus');
+    try {
+      const ollamaResponse = await fetch(`${chatBase('claude-opus:latest')}/api/tags`, {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      if (ollamaStatus) {
+        ollamaStatus.textContent = ollamaResponse.ok ? '● Active' : '● Inactive';
+        ollamaStatus.style.color = ollamaResponse.ok ? '#22c55e' : '#ef4444';
+      }
+    } catch (e) {
+      if (ollamaStatus) {
+        ollamaStatus.textContent = '● Inactive';
+        ollamaStatus.style.color = '#ef4444';
+      }
+    }
+    
+    // Tor Network status (file-based, assume active if Q5 is active)
+    const torStatus = document.getElementById('torStatus');
+    if (torStatus) {
+      // Tor network status is determined by Q5 availability
+      const isTorActive = q5Status && q5Status.textContent === '● Active';
+      torStatus.textContent = isTorActive ? '● Active' : '● Inactive';
+      torStatus.style.color = isTorActive ? '#22c55e' : '#ef4444';
+    }
+    
+    showToast('Network status refreshed');
+  }
         const data = await response.json();
         const modelCount = data.models?.length || 0;
         ollamaHost = testHost;
