@@ -1523,6 +1523,8 @@ Be direct. Be fast. Be useful.`
       
       currentConversation.messages.push({ role: 'assistant', content: fullResponse });
       lucide.createIcons(); scrollToBottom();
+      // Auto-speak if enabled
+      if (fullResponse) autoSpeakResponse(fullResponse);
       isGenerating = false; renderSidebar(); lucide.createIcons();
 
     } catch (error) {
@@ -1618,6 +1620,71 @@ Be direct. Be fast. Be useful.`
       option.textContent = `${voice.name} (${voice.lang})`;
       select.appendChild(option);
     });
+    // Restore saved voice
+    const savedVoice = localStorage.getItem('oroboros-voice-name');
+    if (savedVoice && voices.find(v => v.name === savedVoice)) {
+      select.value = savedVoice;
+    }
+  }
+
+  // ═══════════════ VOICE SETTINGS PERSISTENCE ═══════════════
+  function saveVoiceSettings() {
+    const voiceSelect = document.getElementById('voiceSelect');
+    const voiceRate = document.getElementById('voiceRate');
+    const autoSpeak = document.getElementById('autoSpeakCheckbox');
+    localStorage.setItem('oroboros-voice-name', voiceSelect.value);
+    localStorage.setItem('oroboros-voice-rate', voiceRate.value);
+    localStorage.setItem('oroboros-auto-speak', autoSpeak.checked ? 'true' : 'false');
+    document.getElementById('voiceRateValue').textContent = voiceRate.value + 'x';
+  }
+
+  function loadVoiceSettings() {
+    const savedRate = localStorage.getItem('oroboros-voice-rate');
+    const savedAutoSpeak = localStorage.getItem('oroboros-auto-speak');
+    if (savedRate) {
+      document.getElementById('voiceRate').value = savedRate;
+      document.getElementById('voiceRateValue').textContent = savedRate + 'x';
+    }
+    if (savedAutoSpeak === 'true') {
+      document.getElementById('autoSpeakCheckbox').checked = true;
+    }
+    // Voice select restored in loadVoices() after voices populate
+  }
+
+  function getSavedVoice() {
+    const voices = speechSynthesis.getVoices();
+    const savedName = localStorage.getItem('oroboros-voice-name');
+    if (savedName) {
+      const match = voices.find(v => v.name === savedName);
+      if (match) return match;
+    }
+    return voices.find(v => v.name.includes('Microsoft') && v.lang.startsWith('en') && !v.name.includes('Zira')) || voices[0];
+  }
+
+  function getSavedRate() {
+    const saved = localStorage.getItem('oroboros-voice-rate');
+    return saved ? parseFloat(saved) : 1.0;
+  }
+
+  function isAutoSpeakEnabled() {
+    return localStorage.getItem('oroboros-auto-speak') === 'true';
+  }
+
+  // Auto-speak a response (called after Claude replies)
+  function autoSpeakResponse(text) {
+    if (!isAutoSpeakEnabled()) return;
+    if (!text) return;
+    if (speechSynthesis.speaking) speechSynthesis.cancel();
+    const stopBtn = document.getElementById('stopAudioBtn');
+    stopBtn.classList.add('visible');
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = getSavedVoice();
+    utterance.rate = getSavedRate();
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    utterance.onend = () => stopBtn.classList.remove('visible');
+    utterance.onerror = () => stopBtn.classList.remove('visible');
+    speechSynthesis.speak(utterance);
   }
   
   // Image Generation
@@ -1907,14 +1974,10 @@ Return ONLY the complete HTML code, no explanations.`
     stopBtn.classList.add('visible');
     
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.0;
+    utterance.voice = getSavedVoice();
+    utterance.rate = getSavedRate();
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
-    
-    // Use a good English voice
-    const voices = speechSynthesis.getVoices();
-    const preferred = voices.find(v => v.name.includes('Microsoft') && v.lang.startsWith('en') && !v.name.includes('Zira')) || voices[0];
-    if (preferred) utterance.voice = preferred;
     
     utterance.onend = () => {
       stopBtn.classList.remove('visible');
@@ -2124,14 +2187,21 @@ Return ONLY the complete HTML code, no explanations.`
   <div id="media-voice" class="media-content active">
     <div class="media-section">
       <label class="media-label">Windows Audio Voice</label>
-      <select id="voiceSelect" class="media-select">
+      <select id="voiceSelect" class="media-select" onchange="saveVoiceSettings()">
         <option>Loading voices...</option>
       </select>
     </div>
     <div class="media-section">
       <label class="media-label">Speech Rate</label>
-      <input type="range" id="voiceRate" min="0.5" max="2" step="0.1" value="1" class="media-range">
+      <input type="range" id="voiceRate" min="0.5" max="2" step="0.1" value="1" class="media-range" oninput="saveVoiceSettings()">
       <span id="voiceRateValue">1.0x</span>
+    </div>
+    <div class="media-section">
+      <label class="media-checkbox-label">
+        <input type="checkbox" id="autoSpeakCheckbox" onchange="saveVoiceSettings()">
+        <span>Auto-Speak Responses</span>
+      </label>
+      <span style="font-size:11px;color:var(--text-muted);margin-top:2px;">Automatically reads Claude's replies aloud</span>
     </div>
     <div class="media-section">
       <label class="media-label">Text to Speak</label>
@@ -2347,6 +2417,23 @@ Return ONLY the complete HTML code, no explanations.`
     margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .media-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .media-checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
   }
   
   .media-select, .media-input, .media-textarea, .media-code {
