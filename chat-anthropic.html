@@ -1003,9 +1003,9 @@
             </button>
           </div>
         </div>
-        <a class="icon-btn" href="https://oroboroslabs-ai.github.io/anthropic/" target="_blank" title="GitHub Pages Site" style="text-decoration:none;">
-          <i data-lucide="globe" style="width:18px;height:18px;"></i>
-        </a>
+        <button class="icon-btn" id="crossLinkBtn" onclick="goToCrossSite()" title="Switch site">
+          <i data-lucide="external-link" style="width:18px;height:18px;"></i>
+        </button>
         <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" id="themeToggle">
           <i data-lucide="sun" style="width:18px;height:18px;" id="themeIcon"></i>
         </button>
@@ -1843,6 +1843,34 @@ Return ONLY the complete HTML code, no explanations.`
   // Initialize dark mode by default
   document.body.classList.add('dark');
   document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
+
+  // ═══════════════ CROSS-SITE LINK ═══════════════
+  // Detects which site you're on and links to the other
+  const VERCEL_CHAT = 'https://anthropic-claude-chat.vercel.app';
+  const GITHUB_PAGES = 'https://oroboroslabs-ai.github.io/anthropic/';
+  
+  function goToCrossSite() {
+    const host = window.location.hostname;
+    if (host.includes('github.io')) {
+      window.open(VERCEL_CHAT, '_blank');
+    } else {
+      window.open(GITHUB_PAGES, '_blank');
+    }
+  }
+  
+  // Set cross-link button title dynamically
+  (function setCrossLinkTitle() {
+    const btn = document.getElementById('crossLinkBtn');
+    if (!btn) return;
+    const host = window.location.hostname;
+    if (host.includes('github.io')) {
+      btn.title = 'Open Vercel Chat';
+    } else if (host.includes('vercel.app')) {
+      btn.title = 'Open GitHub Pages Site';
+    } else {
+      btn.title = 'Open GitHub Pages Site';
+    }
+  })();
 
   function copyMessage(btn) { navigator.clipboard.writeText(btn.closest('.message-content').querySelector('.message-text').innerText).then(() => showToast('Copied to clipboard')); }
   
