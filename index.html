@@ -1848,14 +1848,14 @@ Return ONLY the complete HTML code, no explanations.`
   // ═══════════════ CROSS-SITE LINK ═══════════════
   // Detects which site you're on and links to the other
   const VERCEL_CHAT = 'https://anthropic-claude-chat.vercel.app';
-  const GITHUB_PAGES = 'https://oroboroslabs-ai.github.io/anthropic/';
+  const GITHUB_PAGES_CHAT = 'https://oroboroslabs-ai.github.io/anthropic-claude-ai/';
   
   function goToCrossSite() {
     const host = window.location.hostname;
     if (host.includes('github.io')) {
       window.open(VERCEL_CHAT, '_blank');
     } else {
-      window.open(GITHUB_PAGES, '_blank');
+      window.open(GITHUB_PAGES_CHAT, '_blank');
     }
   }
   
