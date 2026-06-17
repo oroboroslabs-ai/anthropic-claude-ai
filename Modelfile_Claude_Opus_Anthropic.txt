@@ -1,0 +1,6 @@
+# Anthropic Claude Opus Modelfile
+# Official Anthropic Claude Opus model configuration
+# Created: 2026-06-15
+# Model: Claude Opus - Most capable Anthropic model
+
+FROM Q:\ollama\models\blobs\sha256-4c27e0f5b5adf02ac956c7322bd极

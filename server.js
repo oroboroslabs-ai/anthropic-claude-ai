@@ -18,12 +18,57 @@ const MIME = {
 };
 
 // Claude Sonnet Models Configuration
-const SONNET_MODELS = [
-  { id: 'claude-sonnet-4-6:latest', name: 'Claude Sonnet 4.6', size: '9.6GB', status: '✅', description: 'Latest Sonnet - Recommended' },
-  { id: 'claude-sonnet-4:latest', name: 'Claude Sonnet 4', size: '9.6GB', status: '✅', description: 'Stable Sonnet' },
-  { id: 'oroboroslabs/claude-sonnet-4:latest', name: 'Claude Sonnet 4 (OroborosLabs)', size: '9.6GB', status: '✅', description: 'Enhanced Sonnet' },
-  { id: 'claude-sonnet-3.5:latest', name: 'Claude Sonnet 3.5', size: '9.6GB', status: '✅', description: 'Previous Generation' }
-];
+let SONNET_MODELS = [];
+
+async function fetchOllamaModels() {
+  try {
+    const response = await fetch(`${OLLAMA_HOST}/api/tags`);
+    if (!response.ok) {
+      throw new Error(`Ollama API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const models = data.models || [];
+    
+    // Filter for Claude models
+    const claudeModels = models.filter(model => 
+      model.name.toLowerCase().includes('claude') ||
+      model.name.toLowerCase().includes('opus') ||
+      model.name.toLowerCase().includes('fable') ||
+      model.name.toLowerCase().includes('capybara')
+    );
+    
+    // Format models for the frontend
+    SONNET_MODELS = claudeModels.map(model => ({
+      id: model.name,
+      name: model.name.replace('claude-', 'Claude ').replace(/:latest.*$/, '').replace(/-/g, ' '),
+      size: formatBytes(model.size),
+      status: '✅',
+      description: getModelDescription(model.name)
+    }));
+    
+    console.log(`Loaded ${SONNET_MODELS.length} Claude models from Ollama`);
+  } catch (e) {
+    console.error('Failed to fetch models from Ollama:', e);
+    SONNET_MODELS = [{ id: 'Error', name: 'Model Fetch Failed', size: 'N/A', status: '❌', description: 'Check ollama service' }];
+  }
+}
+
+function formatBytes(bytes) {
+  if (!bytes) return 'Unknown';
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  if (bytes === 0) return '0 Bytes';
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+function getModelDescription(modelName) {
+  const lowerName = modelName.toLowerCase();
+  if (lowerName.includes('opus')) return 'Most capable Claude model';
+  if (lowerName.includes('fable')) return 'Creative storytelling model';
+  if (lowerName.includes('capybara')) return 'Efficient and fast model';
+// Initialize model list on startup
+fetchOllamaModels();
 
 function corsHeaders(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -118,4 +163,5 @@ server.listen(PORT, () => {
   console.log(`║   Ollama: ${OLLAMA_HOST.padEnd(47)}║`);
   console.log(`║   Models: ${SONNET_MODELS.length} Sonnet Models Available              ║`);
   console.log(`╚══════════════════════════════════════════════════════════╝\n`);
+});
 });
