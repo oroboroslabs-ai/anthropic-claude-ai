@@ -1056,9 +1056,10 @@
         </div>
         <div class="input-bottom-row">
           <div class="input-left-actions">
-            <button class="plus-btn" onclick="showToast('Attach files — coming soon')" title="Attach">
+            <button class="plus-btn" onclick="document.getElementById('fileInput').click()" title="Attach files">
               <span class="plus-icon">+</span>
             </button>
+            <input type="file" id="fileInput" multiple style="display:none" onchange="handleFileUpload(this.files)" accept=".txt,.md,.py,.js,.ts,.jsx,.tsx,.json,.csv,.xml,.html,.css,.pdf,.doc,.docx,.png,.jpg,.jpeg,.gif,.svg,.mp3,.wav,.mp4,.webm" />
             <button class="voice-btn" id="voiceBtn" onclick="toggleVoiceInput()" title="Voice input">
               <i data-lucide="mic" style="width:18px;height:18px;"></i>
             </button>
@@ -2029,6 +2030,40 @@ Return ONLY the complete HTML code, no explanations.`
   })();
 
   function copyMessage(btn) { navigator.clipboard.writeText(btn.closest('.message-content').querySelector('.message-text').innerText).then(() => showToast('Copied to clipboard')); }
+  
+  // ═══════════════ FILE UPLOAD ═══════════════
+  function handleFileUpload(files) {
+    if (!files.length) return;
+    const file = files[0];
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      showToast('File too large. Max 10MB.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      const ext = file.name.split('.').pop().toLowerCase();
+      const textExts = ['txt','md','py','js','ts','jsx','tsx','json','csv','xml','html','css','yml','yaml','ini','cfg','conf','sh','bat','ps1','env','gitignore','dockerfile'];
+      if (textExts.includes(ext)) {
+        document.getElementById('chatInput').value = 
+          `[Attached: ${file.name}]\n\`\`\`\n${content.slice(0, 8000)}\n\`\`\`\n`;
+        showToast(`Attached ${file.name} (${(file.size/1024).toFixed(1)}KB)`);
+      } else {
+        document.getElementById('chatInput').value = 
+          `[Attached: ${file.name} - ${(file.size/1024).toFixed(1)}KB] Please analyze this file.`;
+        showToast(`Attached ${file.name}`);
+      }
+      updateSendBtn();
+    };
+    if (file.type.startsWith('text/') || ['txt','md','py','js','ts','jsx','tsx','json','csv','xml','html','css','yml','yaml','ini','cfg','conf','sh','bat','ps1','env','gitignore','dockerfile'].includes(file.name.split('.').pop().toLowerCase())) {
+      reader.readAsText(file);
+    } else {
+      reader.readAsDataURL(file);
+    }
+    // Reset file input so same file can be re-selected
+    document.getElementById('fileInput').value = '';
+  }
   
   // ═══════════════ VOICE-TO-VOICE ═══════════════
   let isRecording = false;
