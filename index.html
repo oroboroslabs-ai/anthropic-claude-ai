@@ -1643,15 +1643,139 @@ Be direct. Be fast. Be useful.`
     const voices = speechSynthesis.getVoices();
     const select = document.getElementById('voiceSelect');
     select.innerHTML = '';
+    
+    // Asian Windows TTS voices to ensure they're always available
+    const asianVoices = [
+      // Chinese (Simplified) - 简体中文
+      { name: 'Microsoft Huihui - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Kangkang - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yaoyao - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaoxiao - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunxi - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunjian - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaoyi - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunyang - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaochen - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaohan - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaomeng - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaomo - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaoqiu - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaorui - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaoshuang - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaoyan - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Xiaozhen - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunhao - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunxia - Chinese (Simplified)', lang: 'zh-CN' },
+      { name: 'Microsoft Yunze - Chinese (Simplified)', lang: 'zh-CN' },
+      // Chinese (Traditional) - 繁體中文
+      { name: 'Microsoft Hanhan - Chinese (Traditional)', lang: 'zh-TW' },
+      { name: 'Microsoft Yating - Chinese (Traditional)', lang: 'zh-TW' },
+      { name: 'Microsoft Zhiwei - Chinese (Traditional)', lang: 'zh-TW' },
+      { name: 'Microsoft HsiaoChen - Chinese (Traditional)', lang: 'zh-TW' },
+      { name: 'Microsoft YunJhe - Chinese (Traditional)', lang: 'zh-TW' },
+      // Japanese - 日本語
+      { name: 'Microsoft Haruka - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Ichiro - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Ayumi - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Sayaka - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Nanami - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Keita - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Aoi - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Daichi - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Mayu - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Naoki - Japanese', lang: 'ja-JP' },
+      { name: 'Microsoft Shiori - Japanese', lang: 'ja-JP' },
+      // Korean - 한국어
+      { name: 'Microsoft Heami - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft Inja - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft SunHi - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft Hyunsu - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft BongJin - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft GookMin - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft SeoHyeon - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft SoonBok - Korean', lang: 'ko-KR' },
+      { name: 'Microsoft YuJin - Korean', lang: 'ko-KR' },
+      // Hindi - हिन्दी
+      { name: 'Microsoft Hemant - Hindi', lang: 'hi-IN' },
+      { name: 'Microsoft Kalpana - Hindi', lang: 'hi-IN' },
+      { name: 'Microsoft Madhur - Hindi', lang: 'hi-IN' },
+      { name: 'Microsoft Aarav - Hindi', lang: 'hi-IN' },
+      { name: 'Microsoft Neerja - Hindi', lang: 'hi-IN' },
+      { name: 'Microsoft Swara - Hindi', lang: 'hi-IN' },
+      // Thai - ภาษาไทย
+      { name: 'Microsoft Pattara - Thai', lang: 'th-TH' },
+      { name: 'Microsoft Premwadee - Thai', lang: 'th-TH' },
+      { name: 'Microsoft Achara - Thai', lang: 'th-TH' },
+      { name: 'Microsoft Niwat - Thai', lang: 'th-TH' },
+      // Vietnamese - Tiếng Việt
+      { name: 'Microsoft An - Vietnamese', lang: 'vi-VN' },
+      { name: 'Microsoft Chi - Vietnamese', lang: 'vi-VN' },
+      { name: 'Microsoft HoaiMy - Vietnamese', lang: 'vi-VN' },
+      { name: 'Microsoft NamMinh - Vietnamese', lang: 'vi-VN' },
+      // Indonesian - Bahasa Indonesia
+      { name: 'Microsoft Ardi - Indonesian', lang: 'id-ID' },
+      { name: 'Microsoft Gadis - Indonesian', lang: 'id-ID' },
+      // Malay - Bahasa Melayu
+      { name: 'Microsoft Osman - Malay', lang: 'ms-MY' },
+      { name: 'Microsoft Yasmin - Malay', lang: 'ms-MY' },
+      // Filipino - Tagalog
+      { name: 'Microsoft Angelo - Filipino', lang: 'fil-PH' },
+      { name: 'Microsoft Blessica - Filipino', lang: 'fil-PH' },
+      // Tamil - தமிழ்
+      { name: 'Microsoft Valluvar - Tamil', lang: 'ta-IN' },
+      { name: 'Microsoft Elakkiya - Tamil', lang: 'ta-IN' },
+      // Telugu - తెలుగు
+      { name: 'Microsoft Mohan - Telugu', lang: 'te-IN' },
+      { name: 'Microsoft Shruti - Telugu', lang: 'te-IN' },
+      // Bengali - বাংলা
+      { name: 'Microsoft Bashkar - Bengali', lang: 'bn-IN' },
+      { name: 'Microsoft Tanisha - Bengali', lang: 'bn-IN' },
+      // Marathi - मराठी
+      { name: 'Microsoft Aarohi - Marathi', lang: 'mr-IN' },
+      // Gujarati - ગુજરાતી
+      { name: 'Microsoft Dhwani - Gujarati', lang: 'gu-IN' },
+      // Kannada - ಕನ್ನಡ
+      { name: 'Microsoft Sapna - Kannada', lang: 'kn-IN' },
+      // Malayalam - മലയാളം
+      { name: 'Microsoft Sobhana - Malayalam', lang: 'ml-IN' },
+      // Punjabi - ਪੰਜਾਬੀ
+      { name: 'Microsoft Gill - Punjabi', lang: 'pa-IN' },
+      // Urdu - اردو
+      { name: 'Microsoft Asif - Urdu', lang: 'ur-IN' },
+      // Burmese - မြန်မာဘာသာ
+      { name: 'Microsoft Nilar - Burmese', lang: 'my-MM' },
+      // Khmer - ភាសាខ្មែរ
+      { name: 'Microsoft Sreymom - Khmer', lang: 'km-KH' },
+      // Lao - ລາວ
+      { name: 'Microsoft Keomany - Lao', lang: 'lo-LA' },
+      // Sinhala - සිංහල
+      { name: 'Microsoft Samudra - Sinhala', lang: 'si-LK' },
+      // Nepali - नेपाली
+      { name: 'Microsoft Sagar - Nepali', lang: 'ne-NP' },
+    ];
+    
+    // Add dynamically detected voices first
     voices.forEach(voice => {
       const option = document.createElement('option');
       option.value = voice.name;
       option.textContent = `${voice.name} (${voice.lang})`;
       select.appendChild(option);
     });
+    
+    // Add Asian voices as fallback options (skip duplicates)
+    const existingNames = new Set(voices.map(v => v.name));
+    asianVoices.forEach(av => {
+      if (!existingNames.has(av.name)) {
+        const option = document.createElement('option');
+        option.value = av.name;
+        option.textContent = `${av.name} (${av.lang})`;
+        select.appendChild(option);
+      }
+    });
+    
     // Restore saved voice
     const savedVoice = localStorage.getItem('oroboros-voice-name');
-    if (savedVoice && voices.find(v => v.name === savedVoice)) {
+    if (savedVoice && [...voices, ...asianVoices].find(v => v.name === savedVoice)) {
       select.value = savedVoice;
     }
   }
