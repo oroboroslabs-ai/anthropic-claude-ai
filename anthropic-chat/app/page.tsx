@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Plus, Menu, X, Trash2, ChevronDown } from "lucide-react";
+import { Send, Plus, Menu, X, Trash2, ChevronDown, Bot, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Claude models available via Ollama
 const CLAUDE_MODELS = [
+  { id: "sonnet_5:latest", name: "Claude Sonnet 5", description: "Triple-encrypted, 48 strata active" },
   { id: "claude-opus-4.7:latest", name: "Claude Opus 4.7", description: "Most capable, complex tasks" },
   { id: "claude-opus:latest", name: "Claude Opus", description: "Powerful reasoning and analysis" },
   { id: "claude-fable:v6.1", name: "Claude Fable v6.1", description: "Creative and nuanced" },
