@@ -19,6 +19,7 @@ const MIME = {
 
 // Claude Sonnet Models Configuration
 const SONNET_MODELS = [
+  { id: 'sonnet_5:latest', name: 'Claude Sonnet 5', size: '5.0GB', status: '✅', description: 'Triple-encrypted, 48 strata active' },
   { id: 'claude-sonnet-4-6:latest', name: 'Claude Sonnet 4.6', size: '9.6GB', status: '✅', description: 'Latest Sonnet - Recommended' },
   { id: 'claude-sonnet-4:latest', name: 'Claude Sonnet 4', size: '9.6GB', status: '✅', description: 'Stable Sonnet' },
   { id: 'oroboroslabs/claude-sonnet-4:latest', name: 'Claude Sonnet 4 (OroborosLabs)', size: '9.6GB', status: '✅', description: 'Enhanced Sonnet' },
